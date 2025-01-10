@@ -1,0 +1,95 @@
+[gd_scene load_steps=3 format=3 uid="uid://cofx5ldtfg6uf"]
+
+[ext_resource type="Script" path="res://src/how_to_play/how_to_play.gd" id="1_v6w4e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w4iva"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="HowToPlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v6w4e")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w4iva")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="btnExit" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Exit"
+
+[node name="lblTitle" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "How to play"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="rtlContent" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+theme_override_font_sizes/mono_font_size = 30
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 35
+bbcode_enabled = true
+text = "Your goal is to breed a certain type of guinea pig by selecting parents with the right traits.
+You will be trying to match certain fur colours, fur length and fur swirls.
+
+[b][u]How do I breed a certain kind of guinea pig?[/u][/b]
+To get a guinea pig with particular traits, you have to carefully [u]select its parents and roll the wheel[/u]. Take fur length, for example. If you breed a male pig with long fur and a female pig with short fur, the puppies could either have long fur like their father or short fur like their mother. But sometimes two guinea pigs with short fur can have long-furred puppies. How does that work? It all depends on the alleles.
+
+[b][u]What are Genes?[/u][/b]
+A gene is a heritable factor that influences a specific trait. The various specific forms of a gene are alleles.
+A pup, like most animals, has two copies of every kind of gene (and allele) for a certain trait. It gets one from its mother and one from its father. What the pup looks like depends on which alleles of genes the pup gets.
+(Since the parents have a total of four genes for a certain trait between them and the pup gets only two, there's always an element of chance involved in breeding.)
+
+[b][u]Fur length[/u][/b]
+In guinea pigs, the gene that determines fur length comes in two forms (alleles) - one for long and one for short fur. A pup that gets two alleles for long fur has long fur. A pup with two alleles for short fur has short fur.
+But what if a pup gets the allele for long fur from one parent and the allele for short fur from the other? (Remember, alleles og genes for a certain trait come in pairs - one from the mother, one from the father.) That pup will always have short fur, because the allele for short fur is stronger, or \"dominant\". It always wins out over the weaker or \"recessive\" long fur allele. Scientists use big and small letters to describe alleles, so, for example, long fur is l and short fur is L. The upper-case letter always represents the dominant allele, so a pup with the combination \"Ll\" would have short fur.
+To keep things simple, this game uses symbols instead of letters... You can see them below the guinnea pig's picture. The larger symbol represents the dominant allele for that trait; the smaller symbol is the recessive allele.
+
+[b][u]Fur swirls[/u][/b]
+Fur swirls work like fur length, the allele for fur with swirls is dominant, and the allele for fur with no swirls is recessive. So if a pup has one of each, it will always have swirls.
+
+[b][u]Fur colour[/u][/b]
+What about fur colour? In guinea pigs, some are yellow and some are white. Some are also in the middle, or cream (colour). These alleles work a little differently: If a puppy has two white fur alleles, it has white fur. If it has two yellow fur alleles, it has yellow fur. But if it has one of each allele, it has cream fur!
+
+[b][i]Summary[/i][/b]
+That's how the traits of guinea pig pups are determined. But remember, that a short-furred pup with one short fur allele and one long fur allele can still pass the allele for long hair on to its offspring. The same applies to the other traits. So that's why two guinea pigs with swirls can have a pup with no swirls!
+"
+selection_enabled = true

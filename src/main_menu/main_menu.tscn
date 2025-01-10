@@ -1,0 +1,131 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqubu87pvq7nq"]
+
+[ext_resource type="Script" path="res://src/main_menu/main_menu.gd" id="1_j8h2n"]
+[ext_resource type="Texture2D" uid="uid://brx3islm3co4a" path="res://assets/guinea_pig/long-noswirls-cream.png" id="1_jpkbo"]
+[ext_resource type="Texture2D" uid="uid://byce8jnxkp1ut" path="res://assets/guinea_pig/short-noswirls-cream.png" id="2_vhy0n"]
+[ext_resource type="Texture2D" uid="uid://5pcbctx21bet" path="res://assets/guinea_pig/short-swirls-white.png" id="3_7fr3p"]
+[ext_resource type="FontFile" uid="uid://djw4x7uisd0rl" path="res://assets/font/Aptos.ttf" id="4_lr2ss"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_urxpa"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cwkj3"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j8h2n")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_urxpa")
+
+[node name="guinea-pig-1" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -791.0
+offset_top = -938.0
+offset_right = -191.0
+offset_bottom = -618.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("1_jpkbo")
+
+[node name="guinea-pig-2" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 58.0
+offset_top = -525.0
+offset_right = 658.0
+offset_bottom = -114.0
+grow_vertical = 0
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_vhy0n")
+
+[node name="guinea-pig-3" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1653.0
+offset_top = 15.0
+offset_right = -1053.0
+offset_bottom = 314.0
+grow_horizontal = 0
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_7fr3p")
+flip_h = true
+
+[node name="lblTitle_Genetic" type="Label" parent="."]
+layout_mode = 2
+offset_left = 182.0
+offset_top = 301.0
+offset_right = 1032.0
+offset_bottom = 607.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_lr2ss")
+theme_override_font_sizes/font_size = 250
+text = "Genetic"
+
+[node name="lblTitle_Shuffle" type="Label" parent="."]
+layout_mode = 2
+offset_left = 879.0
+offset_top = 498.0
+offset_right = 1645.0
+offset_bottom = 804.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_lr2ss")
+theme_override_font_sizes/font_size = 250
+text = "Shuffle"
+
+[node name="btnStart" type="Button" parent="."]
+layout_mode = 2
+offset_left = 829.0
+offset_top = 792.0
+offset_right = 1329.0
+offset_bottom = 992.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_lr2ss")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_cwkj3")
+text = "Start"
+
+[node name="btnHowToPlay" type="Button" parent="."]
+layout_mode = 2
+offset_left = 1353.0
+offset_top = 792.0
+offset_right = 1853.0
+offset_bottom = 992.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_lr2ss")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_cwkj3")
+text = "  How to play  "
