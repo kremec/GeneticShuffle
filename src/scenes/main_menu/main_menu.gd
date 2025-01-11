@@ -9,7 +9,7 @@ func _ready() -> void:
 	btnHowToPlay.pressed.connect(_on_btnHowToPlay_pressed)
 
 func _on_btnStart_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/game/game.tscn")
+	get_tree().change_scene_to_file("res://src/scenes/game/game.tscn")
 
 func _on_btnHowToPlay_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/how_to_play/how_to_play.tscn")
+	get_tree().change_scene_to_file("res://src/scenes/how_to_play/how_to_play.tscn")

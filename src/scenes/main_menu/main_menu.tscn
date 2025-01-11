@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cqubu87pvq7nq"]
 
-[ext_resource type="Script" path="res://src/main_menu/main_menu.gd" id="1_j8h2n"]
+[ext_resource type="Script" path="res://src/scenes/main_menu/main_menu.gd" id="1_j8h2n"]
 [ext_resource type="Texture2D" uid="uid://brx3islm3co4a" path="res://assets/guinea_pig/long-noswirls-cream.png" id="1_jpkbo"]
 [ext_resource type="Texture2D" uid="uid://byce8jnxkp1ut" path="res://assets/guinea_pig/short-noswirls-cream.png" id="2_vhy0n"]
 [ext_resource type="Texture2D" uid="uid://5pcbctx21bet" path="res://assets/guinea_pig/short-swirls-white.png" id="3_7fr3p"]
@@ -67,6 +67,7 @@ offset_bottom = -114.0
 grow_vertical = 0
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_vhy0n")
+flip_h = true
 
 [node name="guinea-pig-3" type="TextureRect" parent="Background"]
 layout_mode = 1

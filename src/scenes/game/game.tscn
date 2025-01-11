@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://clqgk4akh3gfv"]
+
+[ext_resource type="Script" path="res://src/scenes/game/game.gd" id="1_eim4h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vo3v"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eim4h")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3vo3v")
+
+[node name="layout" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="sidebarMales" type="ScrollContainer" parent="layout"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="listMales" type="VBoxContainer" parent="layout/sidebarMales"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="layout"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="sidebarFemales" type="ScrollContainer" parent="layout"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="listFemales" type="VBoxContainer" parent="layout/sidebarFemales"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

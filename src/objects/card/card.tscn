@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://bss7clukvsfxe"]
+
+[ext_resource type="Script" path="res://src/objects/card/card.gd" id="1_gimfk"]
+[ext_resource type="Texture2D" uid="uid://brx3islm3co4a" path="res://assets/guinea_pig/long-noswirls-cream.png" id="2_lx4jp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifh83"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[node name="Card" type="BoxContainer"]
+custom_minimum_size = Vector2(320, 320)
+offset_right = 320.0
+offset_bottom = 320.0
+script = ExtResource("1_gimfk")
+
+[node name="button" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_ifh83")
+
+[node name="MarginContainer" type="MarginContainer" parent="button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="button/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "Test123"
+
+[node name="image" type="TextureRect" parent="button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 450.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+texture = ExtResource("2_lx4jp")
+expand_mode = 1
