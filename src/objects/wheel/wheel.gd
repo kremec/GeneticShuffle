@@ -19,10 +19,21 @@ var swirlsRecessiveImage = preload("res://assets/alleles/swirlsRecessive.png")
 var colourDominantImage = preload("res://assets/alleles/colorYellow.png")
 var colourRecessiveImage = preload("res://assets/alleles/colorWhite.png")
 
+@onready var alleleImages = {
+	1: $Alleles/alleles1,
+	2: $Alleles/alleles2,
+	3: $Alleles/alleles3,
+	4: $Alleles/alleles4,
+	5: $Alleles/alleles5,
+	6: $Alleles/alleles6,
+	7: $Alleles/alleles7,
+	8: $Alleles/alleles8
+}
+
 
 @export var wheelSpinSpeed: float = 360
 
-var alleles = {}
+var alleles = {1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: [], 8: []}
 
 func Init(_wheelType: WheelType) -> void:
 	wheelType = _wheelType
@@ -58,18 +69,21 @@ func validateAlleleCount(card: Card) -> void:
 func setWheelAlleles(card: Card) -> void:
 	var alleleTypes = [
 		{
+			"type": Allele.TraitType.Length,
 			"show": card.showFurLengthAlleles,
 			"alleles": card.furLengthAlleles,
 			"dominant": lengthDominantImage,
 			"recessive": lengthRecessiveImage
 		},
 		{
+			"type": Allele.TraitType.Swirls,
 			"show": card.showFurSwirlsAlleles,
 			"alleles": card.furSwirlsAlleles,
 			"dominant": swirlsDominantImage,
 			"recessive": swirlsRecessiveImage
 		},
 		{
+			"type": Allele.TraitType.Color,
 			"show": card.showFurColorAlleles,
 			"alleles": card.furColorAlleles,
 			"dominant": colourDominantImage,
@@ -84,6 +98,7 @@ func setWheelAlleles(card: Card) -> void:
 		if alleleType["show"]:
 			allelesShown += 1
 			setAllelePositions(
+				alleleType["type"],
 				alleleType["alleles"],
 				getAllelePositionsForWheelType(),
 				alleleType["dominant"],
@@ -93,57 +108,96 @@ func setWheelAlleles(card: Card) -> void:
 
 func getAllelePositionsForWheelType() -> Array:
 	match wheelType:
-		WheelType.Wheel2: return [$Alleles/alleles3, $Alleles/alleles7]
-		WheelType.Wheel4: return [$Alleles/alleles2, $Alleles/alleles4, $Alleles/alleles6, $Alleles/alleles8]
-		WheelType.Wheel8: return [$Alleles/alleles1, $Alleles/alleles2, $Alleles/alleles3, $Alleles/alleles4, $Alleles/alleles5, $Alleles/alleles6, $Alleles/alleles7, $Alleles/alleles8]
+		WheelType.Wheel2: return [3, 7]
+		WheelType.Wheel4: return [2, 4, 6, 8]
+		WheelType.Wheel8: return [1, 2, 3, 4, 5, 6, 7, 8]
 	return []
 
-func setAllelePositions(alleleCombo: Allele.AlleleCombo, positionNodes: Array, dominantImage: Texture, recessiveImage: Texture, allelesShown: int) -> void:
+func setAllelePositions(
+		alleleType: Allele.TraitType,
+		alleleCombo: Allele.AlleleCombo,
+		positionNodes: Array,
+		dominantImage: Texture,
+		recessiveImage: Texture,
+		allelesShown: int
+) -> void:
 	var images = []
+	var newAlleles = []
 	var numPositions = len(positionNodes)
 	match alleleCombo:
 		Allele.AlleleCombo.DominantDominant:
 			# All dominant
 			for i in numPositions:
+				newAlleles.append([alleleType, Allele.AlleleType.Dominant])
 				images.append(dominantImage)
 		Allele.AlleleCombo.RecessiveRecessive:
 			# All recessive
 			for i in numPositions:
+				newAlleles.append([alleleType, Allele.AlleleType.Recessive])
 				images.append(recessiveImage)
 		Allele.AlleleCombo.DominantRecessive:
 			# Mixed based on number of alleles shown
 			if allelesShown == 1:
+				# Halfs
 				for i in numPositions / 2:
+					newAlleles.append([alleleType, Allele.AlleleType.Dominant])
 					images.append(dominantImage)
 				for i in numPositions / 2:
+					newAlleles.append([alleleType, Allele.AlleleType.Recessive])
 					images.append(recessiveImage)
 			elif allelesShown == 2:
+				# Quarters
 				for i in numPositions / 4:
+					newAlleles.append([alleleType, Allele.AlleleType.Dominant])
 					images.append(dominantImage)
 				for i in numPositions / 4:
+					newAlleles.append([alleleType, Allele.AlleleType.Recessive])
 					images.append(recessiveImage)
 				for i in numPositions / 4:
+					newAlleles.append([alleleType, Allele.AlleleType.Dominant])
 					images.append(dominantImage)
 				for i in numPositions / 4:
+					newAlleles.append([alleleType, Allele.AlleleType.Recessive])
 					images.append(recessiveImage)
 			else:
+				# Every other
 				for i in numPositions:
 					if i % 2 == 0:
+						newAlleles.append([alleleType, Allele.AlleleType.Dominant])
 						images.append(dominantImage)
 					else:
+						newAlleles.append([alleleType, Allele.AlleleType.Recessive])
 						images.append(recessiveImage)
-		
-		
-	for i in range(len(positionNodes)):
-		positionNodes[i].add_child(createAlleleImageNode(images[i]))
+	
+	for i in range(numPositions):
+		alleles[positionNodes[i]].append(newAlleles[i])
+		alleleImages[positionNodes[i]].add_child(createAlleleImageNode(images[i]))
 
-func createAlleleImageNode(image: Texture) -> TextureRect:
+	var debugWheelAlleles = false
+	if debugWheelAlleles:
+		for key in alleles.keys():
+			var string: String = ""
+			string += str(key) + ": "
+			for allele in alleles[key]:
+				string += "  " + Allele.StringTraitType(allele[0]) + " - " + Allele.StringAlleleType(allele[1])
+			print(string)
+		print("\n")
+
+func createAlleleImageNode(image: Texture) -> Node:
+	var boxContainer: BoxContainer = BoxContainer.new()
+	boxContainer.size_flags_vertical = Control.SizeFlags.SIZE_EXPAND_FILL
 	var textureRect = TextureRect.new()
 	textureRect.texture = image
 	textureRect.custom_minimum_size = Vector2(45, 45)
-	return textureRect
+	textureRect.size_flags_vertical = Control.SizeFlags.SIZE_SHRINK_CENTER
+	textureRect.size_flags_horizontal = Control.SizeFlags.SIZE_SHRINK_CENTER
+	boxContainer.add_child(textureRect)
+	return boxContainer
 
 func ResetAlleles():
+	for key in alleles.keys():
+		alleles[key].clear()
+	
 	for n in $Alleles/alleles1.get_children(): $Alleles/alleles1.remove_child(n)
 	for n in $Alleles/alleles2.get_children(): $Alleles/alleles2.remove_child(n)
 	for n in $Alleles/alleles3.get_children(): $Alleles/alleles3.remove_child(n)
@@ -171,38 +225,38 @@ func Spin():
 
 func GetAlleles():
 	var wheelNode = $"."
-	var relativeRotation = wheelNode.rotation_degrees - (floor(wheelNode.rotation_degrees) / 360) * 360
+	var relativeRotation = wheelNode.rotation_degrees - (int(wheelNode.rotation_degrees) / 360) * 360
 
 	# Get alleles
 	match wheelType:
 		WheelType.Wheel2:
 			if relativeRotation < 180:
-				print("7")
+				return alleles[7]
 			else:
-				print("3")
+				return alleles[3]
 		WheelType.Wheel4:
 			if relativeRotation < 90:
-				print("8")
+				return alleles[8]
 			elif relativeRotation < 180:
-				print("6")
+				return alleles[6]
 			elif relativeRotation < 270:
-				print("4")
+				return alleles[4]
 			else:
-				print("2")
+				return alleles[2]
 		WheelType.Wheel8:
 			if relativeRotation < 45:
-				print("8")
+				return alleles[8]
 			elif relativeRotation < 90:
-				print("7")
+				return alleles[7]
 			elif relativeRotation < 135:
-				print("6")
+				return alleles[6]
 			elif relativeRotation < 180:
-				print("5")
+				return alleles[5]
 			elif relativeRotation < 225:
-				print("4")
+				return alleles[4]
 			elif relativeRotation < 270:
-				print("3")
+				return alleles[3]
 			elif relativeRotation < 315:
-				print("2")
+				return alleles[2]
 			else:
-				print("1")
+				return alleles[1]

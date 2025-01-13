@@ -64,3 +64,23 @@ static func GetFurColor(alleles: AlleleCombo) -> FurColor:
 		Allele.AlleleCombo.RecessiveRecessive:
 			furColor = FurColor.White
 	return furColor
+
+static func StringTraitType(traitType: TraitType) -> String:
+	var traitTypeString: String
+	match traitType:
+		TraitType.Length:
+			traitTypeString = "Length"
+		TraitType.Swirls:
+			traitTypeString = "Swirls"
+		TraitType.Color:
+			traitTypeString = "Color"
+	return traitTypeString
+
+static func StringAlleleType(alleleType: AlleleType) -> String:
+	var alleleTypeString: String
+	match alleleType:
+		AlleleType.Dominant:
+			alleleTypeString = "Dominant"
+		AlleleType.Recessive:
+			alleleTypeString = "Recessive"
+	return alleleTypeString

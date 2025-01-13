@@ -16,7 +16,7 @@ enum Sex {
 @onready var swirlsAllele1 = $button/HBoxContainer/allelesSwirls/swirlsAllele1
 @onready var swirlsAllele2 = $button/HBoxContainer/allelesSwirls/swirlsAllele2
 @onready var colorAllele1 = $button/HBoxContainer/allelesColor/colorAllele1
-@onready var colorAllele2 = $button/HBoxContainer/allelesColor/colorAllele1
+@onready var colorAllele2 = $button/HBoxContainer/allelesColor/colorAllele2
 
 @export var selected: bool
 
