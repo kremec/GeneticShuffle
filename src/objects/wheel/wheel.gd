@@ -1,13 +1,10 @@
-extends Control
-class_name Wheel
+class_name Wheel extends Control
 
 enum WheelType {
 	Wheel2,
 	Wheel4,
 	Wheel8,
 }
-
-@export var wheelSpinSpeed: float = 360
 
 var wheelType: WheelType
 
@@ -22,221 +19,123 @@ var swirlsRecessiveImage = preload("res://assets/alleles/swirlsRecessive.png")
 var colourDominantImage = preload("res://assets/alleles/colorYellow.png")
 var colourRecessiveImage = preload("res://assets/alleles/colorWhite.png")
 
+
+@export var wheelSpinSpeed: float = 360
+
+var alleles = {}
+
 func Init(_wheelType: WheelType) -> void:
-	self.wheelType = _wheelType
+	wheelType = _wheelType
 	var wheelImage: TextureRect = $wheel
+	var alleleContainers: Control = $Alleles
 	match _wheelType:
 		WheelType.Wheel2:
 			wheelImage.texture = wheel2Image
-			wheelImage.rotation_degrees = 0
+			alleleContainers.rotation_degrees = 0
 		WheelType.Wheel4:
 			wheelImage.texture = wheel4Image
-			wheelImage.rotation_degrees = 0
+			alleleContainers.rotation_degrees = 0
 		WheelType.Wheel8:
 			wheelImage.texture = wheel8Image
-			wheelImage.rotation_degrees = 22.5
+			alleleContainers.rotation_degrees = 22.5
 
-func SetAlleles(
-	card: Card,
-) -> void:
-	var totalTrue = [card.showFurLengthAlleles, card.showFurSwirlsAlleles, card.showFurColourAlleles].count(true)
-	match wheelType:
-		WheelType.Wheel2:
-			assert(totalTrue == 1)
-		WheelType.Wheel4:
-			assert(totalTrue == 2)
-		WheelType.Wheel8:
-			assert(totalTrue == 3)
+func SetAlleles(card: Card) -> void:
+	validateAlleleCount(card)
+	setWheelAlleles(card)
 
-	var allelesPosition1 = $Alleles/alleles1
-	var allelesPosition2 = $Alleles/alleles2
-	var allelesPosition3 = $Alleles/alleles3
-	var allelesPosition4 = $Alleles/alleles4
-	var allelesPosition5 = $Alleles/alleles5
-	var allelesPosition6 = $Alleles/alleles6
-	var allelesPosition7 = $Alleles/alleles7
-	var allelesPosition8 = $Alleles/alleles8
+func validateAlleleCount(card: Card) -> void:
+	var totalTrue = [
+		card.showFurLengthAlleles,
+		card.showFurSwirlsAlleles,
+		card.showFurColorAlleles
+	].count(true)
+
 	match wheelType:
-		WheelType.Wheel2:
-			# Use allele positions 3 and 7
-			if card.showFurLengthAlleles:
-				match card.furLengthAlleles:
-					Card.Alleles.DominantDominant:
-						allelesPosition3.add_child(createAlleleImageNode(lengthDominantImage))
-						allelesPosition7.add_child(createAlleleImageNode(lengthDominantImage))
-					Card.Alleles.DominantRecessive:
-						allelesPosition3.add_child(createAlleleImageNode(lengthDominantImage))
-						allelesPosition7.add_child(createAlleleImageNode(lengthRecessiveImage))
-					Card.Alleles.RecessiveRecessive:
-						allelesPosition3.add_child(createAlleleImageNode(lengthRecessiveImage))
-						allelesPosition7.add_child(createAlleleImageNode(lengthRecessiveImage))
-			if card.showFurSwirlsAlleles:
-				match card.furSwirlsAlleles:
-					Card.Alleles.DominantDominant:
-						allelesPosition3.add_child(createAlleleImageNode(swirlsDominantImage))
-						allelesPosition7.add_child(createAlleleImageNode(swirlsDominantImage))
-					Card.Alleles.DominantRecessive:
-						allelesPosition3.add_child(createAlleleImageNode(swirlsDominantImage))
-						allelesPosition7.add_child(createAlleleImageNode(swirlsRecessiveImage))
-					Card.Alleles.RecessiveRecessive:
-						allelesPosition3.add_child(createAlleleImageNode(swirlsRecessiveImage))
-						allelesPosition7.add_child(createAlleleImageNode(swirlsRecessiveImage))
-			if card.showFurColourAlleles:
-				match card.furColourAlleles:
-					Card.Alleles.DominantDominant:
-						allelesPosition3.add_child(createAlleleImageNode(colourDominantImage))
-						allelesPosition7.add_child(createAlleleImageNode(colourDominantImage))
-					Card.Alleles.DominantRecessive:
-						allelesPosition3.add_child(createAlleleImageNode(colourDominantImage))
-						allelesPosition7.add_child(createAlleleImageNode(colourRecessiveImage))
-					Card.Alleles.RecessiveRecessive:
-						allelesPosition3.add_child(createAlleleImageNode(colourRecessiveImage))
-						allelesPosition7.add_child(createAlleleImageNode(colourRecessiveImage))
-		WheelType.Wheel4:
-			# Use allele positions 2, 4, 6 and 8
-			if card.showFurLengthAlleles:
-				match card.furLengthAlleles:
-					Card.Alleles.DominantDominant:
-						allelesPosition2.add_child(createAlleleImageNode(lengthDominantImage))
-						allelesPosition4.add_child(createAlleleImageNode(lengthDominantImage))
-						allelesPosition6.add_child(createAlleleImageNode(lengthDominantImage))
-						allelesPosition8.add_child(createAlleleImageNode(lengthDominantImage))
-					Card.Alleles.DominantRecessive:
-						allelesPosition2.add_child(createAlleleImageNode(lengthDominantImage))
-						allelesPosition4.add_child(createAlleleImageNode(lengthDominantImage))
-						allelesPosition6.add_child(createAlleleImageNode(lengthRecessiveImage))
-						allelesPosition8.add_child(createAlleleImageNode(lengthRecessiveImage))
-					Card.Alleles.RecessiveRecessive:
-						allelesPosition2.add_child(createAlleleImageNode(lengthRecessiveImage))
-						allelesPosition4.add_child(createAlleleImageNode(lengthRecessiveImage))
-						allelesPosition6.add_child(createAlleleImageNode(lengthRecessiveImage))
-						allelesPosition8.add_child(createAlleleImageNode(lengthRecessiveImage))
-			if card.showFurSwirlsAlleles:
-				match card.furSwirlsAlleles:
-					Card.Alleles.DominantDominant:
-						allelesPosition2.add_child(createAlleleImageNode(swirlsDominantImage))
-						allelesPosition4.add_child(createAlleleImageNode(swirlsDominantImage))
-						allelesPosition6.add_child(createAlleleImageNode(swirlsDominantImage))
-						allelesPosition8.add_child(createAlleleImageNode(swirlsDominantImage))
-					Card.Alleles.DominantRecessive:
-						allelesPosition2.add_child(createAlleleImageNode(swirlsDominantImage))
-						allelesPosition4.add_child(createAlleleImageNode(swirlsRecessiveImage))
-						allelesPosition6.add_child(createAlleleImageNode(swirlsRecessiveImage))
-						allelesPosition8.add_child(createAlleleImageNode(swirlsDominantImage))
-					Card.Alleles.RecessiveRecessive:
-						allelesPosition2.add_child(createAlleleImageNode(swirlsRecessiveImage))
-						allelesPosition4.add_child(createAlleleImageNode(swirlsRecessiveImage))
-						allelesPosition6.add_child(createAlleleImageNode(swirlsRecessiveImage))
-						allelesPosition8.add_child(createAlleleImageNode(swirlsRecessiveImage))
-			if card.showFurColourAlleles:
-				match card.colourAlleles:
-					Card.Alleles.DominantDominant:
-						allelesPosition2.add_child(createAlleleImageNode(colourDominantImage))
-						allelesPosition4.add_child(createAlleleImageNode(colourDominantImage))
-						allelesPosition6.add_child(createAlleleImageNode(colourDominantImage))
-						allelesPosition8.add_child(createAlleleImageNode(colourDominantImage))
-					Card.Alleles.DominantRecessive:
-						if (card.showFurLengthAlleles):
-							allelesPosition2.add_child(createAlleleImageNode(colourDominantImage))
-							allelesPosition4.add_child(createAlleleImageNode(colourRecessiveImage))
-							allelesPosition6.add_child(createAlleleImageNode(colourRecessiveImage))
-							allelesPosition8.add_child(createAlleleImageNode(colourDominantImage))
-						else:
-							allelesPosition2.add_child(createAlleleImageNode(colourDominantImage))
-							allelesPosition4.add_child(createAlleleImageNode(colourRecessiveImage))
-							allelesPosition6.add_child(createAlleleImageNode(colourRecessiveImage))
-							allelesPosition8.add_child(createAlleleImageNode(colourDominantImage))
-					Card.Alleles.RecessiveRecessive:
-						allelesPosition2.add_child(createAlleleImageNode(colourRecessiveImage))
-						allelesPosition4.add_child(createAlleleImageNode(colourRecessiveImage))
-						allelesPosition6.add_child(createAlleleImageNode(colourRecessiveImage))
-						allelesPosition8.add_child(createAlleleImageNode(colourRecessiveImage))
-		WheelType.Wheel8:
-			# Use all allele positions
-			match card.lengthAlleles:
-				Card.Alleles.DominantDominant:
-					allelesPosition1.add_child(createAlleleImageNode(lengthDominantImage))
-					allelesPosition2.add_child(createAlleleImageNode(lengthDominantImage))
-					allelesPosition3.add_child(createAlleleImageNode(lengthDominantImage))
-					allelesPosition4.add_child(createAlleleImageNode(lengthDominantImage))
-					allelesPosition5.add_child(createAlleleImageNode(lengthDominantImage))
-					allelesPosition6.add_child(createAlleleImageNode(lengthDominantImage))
-					allelesPosition7.add_child(createAlleleImageNode(lengthDominantImage))
-					allelesPosition8.add_child(createAlleleImageNode(lengthDominantImage))
-				Card.Alleles.DominantRecessive:
-					allelesPosition1.add_child(createAlleleImageNode(lengthDominantImage))
-					allelesPosition2.add_child(createAlleleImageNode(lengthDominantImage))
-					allelesPosition3.add_child(createAlleleImageNode(lengthDominantImage))
-					allelesPosition4.add_child(createAlleleImageNode(lengthDominantImage))
-					allelesPosition5.add_child(createAlleleImageNode(lengthRecessiveImage))
-					allelesPosition6.add_child(createAlleleImageNode(lengthRecessiveImage))
-					allelesPosition7.add_child(createAlleleImageNode(lengthRecessiveImage))
-					allelesPosition8.add_child(createAlleleImageNode(lengthRecessiveImage))
-				Card.Alleles.RecessiveRecessive:
-					allelesPosition1.add_child(createAlleleImageNode(lengthRecessiveImage))
-					allelesPosition2.add_child(createAlleleImageNode(lengthRecessiveImage))
-					allelesPosition3.add_child(createAlleleImageNode(lengthRecessiveImage))
-					allelesPosition4.add_child(createAlleleImageNode(lengthRecessiveImage))
-					allelesPosition5.add_child(createAlleleImageNode(lengthRecessiveImage))
-					allelesPosition6.add_child(createAlleleImageNode(lengthRecessiveImage))
-					allelesPosition7.add_child(createAlleleImageNode(lengthRecessiveImage))
-					allelesPosition8.add_child(createAlleleImageNode(lengthRecessiveImage))
-			match card.furSwirlsAlleles:
-				Card.Alleles.DominantDominant:
-					allelesPosition1.add_child(createAlleleImageNode(swirlsDominantImage))
-					allelesPosition2.add_child(createAlleleImageNode(swirlsDominantImage))
-					allelesPosition3.add_child(createAlleleImageNode(swirlsDominantImage))
-					allelesPosition4.add_child(createAlleleImageNode(swirlsDominantImage))
-					allelesPosition5.add_child(createAlleleImageNode(swirlsDominantImage))
-					allelesPosition6.add_child(createAlleleImageNode(swirlsDominantImage))
-					allelesPosition7.add_child(createAlleleImageNode(swirlsDominantImage))
-					allelesPosition8.add_child(createAlleleImageNode(swirlsDominantImage))
-				Card.Alleles.DominantRecessive:
-					allelesPosition1.add_child(createAlleleImageNode(swirlsDominantImage))
-					allelesPosition2.add_child(createAlleleImageNode(swirlsDominantImage))
-					allelesPosition3.add_child(createAlleleImageNode(swirlsRecessiveImage))
-					allelesPosition4.add_child(createAlleleImageNode(swirlsRecessiveImage))
-					allelesPosition5.add_child(createAlleleImageNode(swirlsDominantImage))
-					allelesPosition6.add_child(createAlleleImageNode(swirlsDominantImage))
-					allelesPosition7.add_child(createAlleleImageNode(swirlsRecessiveImage))
-					allelesPosition8.add_child(createAlleleImageNode(swirlsRecessiveImage))
-				Card.Alleles.RecessiveRecessive:
-					allelesPosition1.add_child(createAlleleImageNode(swirlsRecessiveImage))
-					allelesPosition2.add_child(createAlleleImageNode(swirlsRecessiveImage))
-					allelesPosition3.add_child(createAlleleImageNode(swirlsRecessiveImage))
-					allelesPosition4.add_child(createAlleleImageNode(swirlsRecessiveImage))
-					allelesPosition5.add_child(createAlleleImageNode(swirlsRecessiveImage))
-					allelesPosition6.add_child(createAlleleImageNode(swirlsRecessiveImage))
-					allelesPosition7.add_child(createAlleleImageNode(swirlsRecessiveImage))
-					allelesPosition8.add_child(createAlleleImageNode(swirlsRecessiveImage))
-			match card.furColourAlleles:
-				Card.Alleles.DominantDominant:
-					allelesPosition1.add_child(createAlleleImageNode(colourDominantImage))
-					allelesPosition2.add_child(createAlleleImageNode(colourDominantImage))
-					allelesPosition3.add_child(createAlleleImageNode(colourDominantImage))
-					allelesPosition4.add_child(createAlleleImageNode(colourDominantImage))
-					allelesPosition5.add_child(createAlleleImageNode(colourDominantImage))
-					allelesPosition6.add_child(createAlleleImageNode(colourDominantImage))
-					allelesPosition7.add_child(createAlleleImageNode(colourDominantImage))
-					allelesPosition8.add_child(createAlleleImageNode(colourDominantImage))
-				Card.Alleles.DominantRecessive:
-					allelesPosition1.add_child(createAlleleImageNode(colourDominantImage))
-					allelesPosition2.add_child(createAlleleImageNode(colourRecessiveImage))
-					allelesPosition3.add_child(createAlleleImageNode(colourDominantImage))
-					allelesPosition4.add_child(createAlleleImageNode(colourRecessiveImage))
-					allelesPosition5.add_child(createAlleleImageNode(colourDominantImage))
-					allelesPosition6.add_child(createAlleleImageNode(colourRecessiveImage))
-					allelesPosition7.add_child(createAlleleImageNode(colourDominantImage))
-					allelesPosition8.add_child(createAlleleImageNode(colourRecessiveImage))
-				Card.Alleles.RecessiveRecessive:
-					allelesPosition1.add_child(createAlleleImageNode(colourRecessiveImage))
-					allelesPosition2.add_child(createAlleleImageNode(colourRecessiveImage))
-					allelesPosition3.add_child(createAlleleImageNode(colourRecessiveImage))
-					allelesPosition4.add_child(createAlleleImageNode(colourRecessiveImage))
-					allelesPosition5.add_child(createAlleleImageNode(colourRecessiveImage))
-					allelesPosition6.add_child(createAlleleImageNode(colourRecessiveImage))
-					allelesPosition7.add_child(createAlleleImageNode(colourRecessiveImage))
-					allelesPosition8.add_child(createAlleleImageNode(colourRecessiveImage))
+		WheelType.Wheel2: assert(totalTrue == 1)
+		WheelType.Wheel4: assert(totalTrue == 2)
+		WheelType.Wheel8: assert(totalTrue == 3)
+
+func setWheelAlleles(card: Card) -> void:
+	var alleleTypes = [
+		{
+			"show": card.showFurLengthAlleles,
+			"alleles": card.furLengthAlleles,
+			"dominant": lengthDominantImage,
+			"recessive": lengthRecessiveImage
+		},
+		{
+			"show": card.showFurSwirlsAlleles,
+			"alleles": card.furSwirlsAlleles,
+			"dominant": swirlsDominantImage,
+			"recessive": swirlsRecessiveImage
+		},
+		{
+			"show": card.showFurColorAlleles,
+			"alleles": card.furColorAlleles,
+			"dominant": colourDominantImage,
+			"recessive": colourRecessiveImage
+		}
+	]
+
+	var allelesShown = 0
+	for i in range(alleleTypes.size()):
+		var alleleType = alleleTypes[i]
+
+		if alleleType["show"]:
+			allelesShown += 1
+			setAllelePositions(
+				alleleType["alleles"],
+				getAllelePositionsForWheelType(),
+				alleleType["dominant"],
+				alleleType["recessive"],
+				allelesShown
+			)
+
+func getAllelePositionsForWheelType() -> Array:
+	match wheelType:
+		WheelType.Wheel2: return [$Alleles/alleles3, $Alleles/alleles7]
+		WheelType.Wheel4: return [$Alleles/alleles2, $Alleles/alleles4, $Alleles/alleles6, $Alleles/alleles8]
+		WheelType.Wheel8: return [$Alleles/alleles1, $Alleles/alleles2, $Alleles/alleles3, $Alleles/alleles4, $Alleles/alleles5, $Alleles/alleles6, $Alleles/alleles7, $Alleles/alleles8]
+	return []
+
+func setAllelePositions(alleleCombo: Allele.AlleleCombo, positionNodes: Array, dominantImage: Texture, recessiveImage: Texture, allelesShown: int) -> void:
+	var images = []
+	var numPositions = len(positionNodes)
+	match alleleCombo:
+		Allele.AlleleCombo.DominantDominant:
+			# All dominant
+			for i in numPositions:
+				images.append(dominantImage)
+		Allele.AlleleCombo.RecessiveRecessive:
+			# All recessive
+			for i in numPositions:
+				images.append(recessiveImage)
+		Allele.AlleleCombo.DominantRecessive:
+			# Mixed based on number of alleles shown
+			if allelesShown == 1:
+				for i in numPositions / 2:
+					images.append(dominantImage)
+				for i in numPositions / 2:
+					images.append(recessiveImage)
+			elif allelesShown == 2:
+				for i in numPositions / 4:
+					images.append(dominantImage)
+				for i in numPositions / 4:
+					images.append(recessiveImage)
+				for i in numPositions / 4:
+					images.append(dominantImage)
+				for i in numPositions / 4:
+					images.append(recessiveImage)
+			else:
+				for i in numPositions:
+					if i % 2 == 0:
+						images.append(dominantImage)
+					else:
+						images.append(recessiveImage)
+		
+		
+	for i in range(len(positionNodes)):
+		positionNodes[i].add_child(createAlleleImageNode(images[i]))
 
 func createAlleleImageNode(image: Texture) -> TextureRect:
 	var textureRect = TextureRect.new()
@@ -253,3 +152,57 @@ func ResetAlleles():
 	for n in $Alleles/alleles6.get_children(): $Alleles/alleles6.remove_child(n)
 	for n in $Alleles/alleles7.get_children(): $Alleles/alleles7.remove_child(n)
 	for n in $Alleles/alleles8.get_children(): $Alleles/alleles8.remove_child(n)
+
+func Spin():
+	var rotationAngle: float = randf_range(360, 360 * 3)
+	var spinDuration: float = rotationAngle / wheelSpinSpeed
+
+	var wheelNode = $"."
+
+	var rotationTween = get_tree().create_tween()
+	rotationTween.tween_property(
+		wheelNode,
+		"rotation_degrees",
+		wheelNode.rotation_degrees + rotationAngle,
+		spinDuration
+	).set_trans(Tween.TRANS_QUINT)
+
+	return rotationTween
+
+func GetAlleles():
+	var wheelNode = $"."
+	var relativeRotation = wheelNode.rotation_degrees - (floor(wheelNode.rotation_degrees) / 360) * 360
+
+	# Get alleles
+	match wheelType:
+		WheelType.Wheel2:
+			if relativeRotation < 180:
+				print("7")
+			else:
+				print("3")
+		WheelType.Wheel4:
+			if relativeRotation < 90:
+				print("8")
+			elif relativeRotation < 180:
+				print("6")
+			elif relativeRotation < 270:
+				print("4")
+			else:
+				print("2")
+		WheelType.Wheel8:
+			if relativeRotation < 45:
+				print("8")
+			elif relativeRotation < 90:
+				print("7")
+			elif relativeRotation < 135:
+				print("6")
+			elif relativeRotation < 180:
+				print("5")
+			elif relativeRotation < 225:
+				print("4")
+			elif relativeRotation < 270:
+				print("3")
+			elif relativeRotation < 315:
+				print("2")
+			else:
+				print("1")

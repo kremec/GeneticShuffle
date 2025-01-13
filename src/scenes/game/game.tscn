@@ -14,6 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_eim4h")
+wheelSpinSpeed = null
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 1
@@ -87,10 +88,12 @@ theme_override_constants/separation = 30
 [node name="wheelMale" parent="layout/MarginContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_gkba2")]
 layout_mode = 2
 mouse_filter = 2
+wheelSpinSpeed = 360.0
 
 [node name="wheelFemale" parent="layout/MarginContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_gkba2")]
 layout_mode = 2
 mouse_filter = 2
+wheelSpinSpeed = 360.0
 
 [node name="newPup" type="Control" parent="layout/MarginContainer"]
 custom_minimum_size = Vector2(260, 260)

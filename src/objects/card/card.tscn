@@ -24,17 +24,6 @@ pivot_offset = Vector2(130, 130)
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("1_gimfk")
-selected = null
-sex = null
-furLength = null
-furLengthAlleles = null
-showFurLengthAlleles = null
-furSwirls = null
-furSwirlsAlleles = null
-showFurSwirlsAlleles = null
-furColour = null
-furColourAlleles = null
-showFurColourAlleles = null
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

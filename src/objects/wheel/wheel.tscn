@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dku5r3f77amfb"]
+[gd_scene load_steps=2 format=3 uid="uid://dku5r3f77amfb"]
 
 [ext_resource type="Script" path="res://src/objects/wheel/wheel.gd" id="1_2bwdd"]
-[ext_resource type="Texture2D" uid="uid://bqgali32fvb6u" path="res://assets/wheel/wheel_4.png" id="2_phw56"]
 
 [node name="Wheel" type="Control"]
 custom_minimum_size = Vector2(500, 500)
@@ -34,7 +33,6 @@ offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(248, 248)
-texture = ExtResource("2_phw56")
 
 [node name="Alleles" type="Control" parent="."]
 layout_mode = 1
@@ -45,6 +43,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+rotation = 0.392699
 
 [node name="alleles1" type="VBoxContainer" parent="Alleles"]
 custom_minimum_size = Vector2(45, 155)
@@ -63,10 +62,6 @@ grow_vertical = 2
 pivot_offset = Vector2(22, 0)
 theme_override_constants/separation = 10
 alignment = 1
-
-[node name="image" type="TextureRect" parent="Alleles/alleles1"]
-custom_minimum_size = Vector2(45, 45)
-layout_mode = 2
 
 [node name="alleles2" type="VBoxContainer" parent="Alleles"]
 custom_minimum_size = Vector2(45, 155)

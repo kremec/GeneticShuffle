@@ -41,31 +41,12 @@ func wheelsSpin() -> void:
 		return
 	maleWheelSpinning = true
 	femaleWheelSpinning = true
-	
-	var rotationAngleMale: float = randf_range(360, 360 * 3)
-	var spinDurationMale: float = rotationAngleMale / wheelSpinSpeed
 
-	var rotationAngleFemale: float = randf_range(360, 360 * 3)
-	var spinDurationFemale: float = rotationAngleFemale / wheelSpinSpeed
+	var maleRotation = wheelMale.Spin()
+	var femaleRotation = wheelFemale.Spin()
 
-	var maleTween = get_tree().create_tween()
-	maleTween.tween_property(
-		wheelMale,
-		"rotation_degrees",
-		wheelMale.rotation_degrees + rotationAngleMale,
-		spinDurationMale
-	).set_trans(Tween.TRANS_QUINT)
-
-	var femaleTween = get_tree().create_tween()
-	femaleTween.tween_property(
-		wheelFemale,
-		"rotation_degrees",
-		wheelFemale.rotation_degrees + rotationAngleFemale,
-		spinDurationFemale
-	).set_trans(Tween.TRANS_QUINT)
-
-	maleTween.finished.connect(_on_male_tween_finished)
-	femaleTween.finished.connect(_on_female_tween_finished)
+	maleRotation.finished.connect(_on_male_tween_finished)
+	femaleRotation.finished.connect(_on_female_tween_finished)
 
 func _on_male_tween_finished() -> void:
 	maleWheelSpinning = false
@@ -80,14 +61,15 @@ func _on_female_tween_finished() -> void:
 
 func afterWheelsSpin():
 	# Get alleles from wheels
-
+	#var maleAlleles = wheelMale.GetAlleles()
+	var femaleAlleles = wheelFemale.GetAlleles()
 
 	# Create
 	newPup = create_card(
 		Card.Sex.Male,
-		Card.Alleles.RecessiveRecessive,
-		Card.Alleles.RecessiveRecessive,
-		Card.Alleles.RecessiveRecessive,
+		Allele.AlleleCombo.RecessiveRecessive,
+		Allele.AlleleCombo.RecessiveRecessive,
+		Allele.AlleleCombo.RecessiveRecessive,
 		[true, false, false],
 		false
 	)
@@ -122,29 +104,29 @@ func _on_newPup_tween_finished() -> void:
 
 func round1() -> void:
 	# Wheel
-	wheelMale.Init(Wheel.WheelType.Wheel2)
+	wheelMale.Init(Wheel.WheelType.Wheel8)
 	wheelMale.ResetAlleles()
-	wheelFemale.Init(Wheel.WheelType.Wheel2)
+	wheelFemale.Init(Wheel.WheelType.Wheel8)
 	wheelFemale.ResetAlleles()
 
 	# Starting guinea pigs
 	listMales.add_child(
 		create_card(
 			Card.Sex.Male,
-			Card.Alleles.DominantDominant,
-			Card.Alleles.RecessiveRecessive,
-			Card.Alleles.DominantDominant,
-			[true, false, false]
+			Allele.AlleleCombo.DominantDominant,
+			Allele.AlleleCombo.DominantRecessive,
+			Allele.AlleleCombo.DominantRecessive,
+			[true, true, true]
 		)
 	)
 
 	listFemales.add_child(
 		create_card(
 			Card.Sex.Female,
-			Card.Alleles.DominantRecessive,
-			Card.Alleles.RecessiveRecessive,
-			Card.Alleles.DominantDominant,
-			[true, false, false]
+			Allele.AlleleCombo.DominantRecessive,
+			Allele.AlleleCombo.DominantRecessive,
+			Allele.AlleleCombo.DominantRecessive,
+			[true, true, true]
 		)
 	)
 
@@ -152,19 +134,19 @@ func round1() -> void:
 	targetPupPosition.add_child(
 		create_card(
 			Card.Sex.Male,
-			Card.Alleles.RecessiveRecessive,
-			Card.Alleles.RecessiveRecessive,
-			Card.Alleles.DominantDominant,
-			[true, false, false],
+			Allele.AlleleCombo.RecessiveRecessive,
+			Allele.AlleleCombo.RecessiveRecessive,
+			Allele.AlleleCombo.DominantDominant,
+			[true, true, true],
 			false
 		)
 	)
 
 func create_card(
 	sex: Card.Sex,
-	furLengthAlleles: Card.Alleles,
-	furSwirlsAlleles: Card.Alleles,
-	furColourAlleles: Card.Alleles,
+	furLengthAlleles: Allele.AlleleCombo,
+	furSwirlsAlleles: Allele.AlleleCombo,
+	furColourAlleles: Allele.AlleleCombo,
 	showAlleles: Array[bool] = [false, false, false],
 	pressable: bool = true,
 ) -> Card:
@@ -199,10 +181,10 @@ func select_card(card: Card):
 	match card.sex:
 		Card.Sex.Male:
 			cardNode.reparent(selectedMalePosition, false)
-			wheelMale.SetAlleles(card, true, false, false)
+			wheelMale.SetAlleles(card)
 		Card.Sex.Female:
 			cardNode.reparent(selectedFemalePosition, false)
-			wheelFemale.SetAlleles(card, true, false, false)
+			wheelFemale.SetAlleles(card)
 	cardNode.set_position(Vector2(0, 0))
 
 func unselect_card(card: Card):
