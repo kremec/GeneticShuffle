@@ -1,7 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bss7clukvsfxe"]
+[gd_scene load_steps=11 format=3 uid="uid://bss7clukvsfxe"]
 
 [ext_resource type="Script" path="res://src/objects/card/card.gd" id="1_gimfk"]
 [ext_resource type="Texture2D" uid="uid://brx3islm3co4a" path="res://assets/guinea_pig/long-noswirls-cream.png" id="2_lx4jp"]
+[ext_resource type="Texture2D" uid="uid://crxq1sxk5bqsf" path="res://assets/alleles/lengthDominant.png" id="3_5nlsm"]
+[ext_resource type="Texture2D" uid="uid://bmc2q2egmql2m" path="res://assets/alleles/lengthRecessive.png" id="4_trw0a"]
+[ext_resource type="Texture2D" uid="uid://cxw7yh6kyqwfd" path="res://assets/alleles/swirlsDominant.png" id="5_l2526"]
+[ext_resource type="Texture2D" uid="uid://dwef4g8eo4sbd" path="res://assets/alleles/swirlsRecessive.png" id="6_pamhv"]
+[ext_resource type="Texture2D" uid="uid://do6ggitjfcene" path="res://assets/alleles/colorYellow.png" id="7_av3n7"]
+[ext_resource type="Texture2D" uid="uid://2m1cg7hxanj" path="res://assets/alleles/colorWhite.png" id="8_07qna"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buinq"]
 bg_color = Color(1, 1, 1, 1)
@@ -107,10 +113,12 @@ layout_mode = 2
 [node name="lengthAllele1" type="TextureRect" parent="button/HBoxContainer/allelesLength"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
+texture = ExtResource("3_5nlsm")
 
 [node name="lengthAllele2" type="TextureRect" parent="button/HBoxContainer/allelesLength"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
+texture = ExtResource("4_trw0a")
 
 [node name="allelesSwirls" type="HBoxContainer" parent="button/HBoxContainer"]
 layout_mode = 2
@@ -118,18 +126,22 @@ layout_mode = 2
 [node name="swirlsAllele1" type="TextureRect" parent="button/HBoxContainer/allelesSwirls"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
+texture = ExtResource("5_l2526")
 
 [node name="swirlsAllele2" type="TextureRect" parent="button/HBoxContainer/allelesSwirls"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
+texture = ExtResource("6_pamhv")
 
 [node name="allelesColor" type="HBoxContainer" parent="button/HBoxContainer"]
 layout_mode = 2
 
-[node name="colorAllele1" type="TextureRect" parent="button/HBoxContainer/allelesColor"]
+[node name="swirlsAllele1" type="TextureRect" parent="button/HBoxContainer/allelesColor"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
+texture = ExtResource("7_av3n7")
 
-[node name="colorAllele2" type="TextureRect" parent="button/HBoxContainer/allelesColor"]
+[node name="swirlsAllele2" type="TextureRect" parent="button/HBoxContainer/allelesColor"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
+texture = ExtResource("8_07qna")

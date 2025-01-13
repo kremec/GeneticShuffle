@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://clqgk4akh3gfv"]
+[gd_scene load_steps=4 format=3 uid="uid://clqgk4akh3gfv"]
 
 [ext_resource type="Script" path="res://src/scenes/game/game.gd" id="1_eim4h"]
+[ext_resource type="PackedScene" uid="uid://dku5r3f77amfb" path="res://src/objects/wheel/wheel.tscn" id="2_gkba2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vo3v"]
 bg_color = Color(1, 1, 1, 1)
@@ -30,9 +31,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="sidebarMales" type="ScrollContainer" parent="layout"]
-custom_minimum_size = Vector2(320, 0)
+custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -41,12 +43,69 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="layout"]
+[node name="MarginContainer" type="MarginContainer" parent="layout"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="selectedMale" type="Control" parent="layout/MarginContainer"]
+custom_minimum_size = Vector2(260, 260)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="selectedFemale" type="Control" parent="layout/MarginContainer"]
+custom_minimum_size = Vector2(260, 260)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="layout/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/margin_top = 0
+
+[node name="btnSpin" type="Button" parent="layout/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "SPIN"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="layout/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 30
+
+[node name="wheelMale" parent="layout/MarginContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_gkba2")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="wheelFemale" parent="layout/MarginContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_gkba2")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="newPup" type="Control" parent="layout/MarginContainer"]
+custom_minimum_size = Vector2(260, 260)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="targetPup" type="Control" parent="layout/MarginContainer"]
+custom_minimum_size = Vector2(260, 260)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
 
 [node name="sidebarFemales" type="ScrollContainer" parent="layout"]
-custom_minimum_size = Vector2(320, 0)
+custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
 size_flags_vertical = 3
 
