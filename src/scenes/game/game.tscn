@@ -14,7 +14,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_eim4h")
-wheelSpinSpeed = null
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 1
@@ -68,7 +67,6 @@ size_flags_vertical = 0
 [node name="MarginContainer" type="MarginContainer" parent="layout/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-mouse_filter = 2
 theme_override_constants/margin_top = 0
 
 [node name="btnSpin" type="Button" parent="layout/MarginContainer/MarginContainer"]
@@ -87,24 +85,33 @@ theme_override_constants/separation = 30
 
 [node name="wheelMale" parent="layout/MarginContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_gkba2")]
 layout_mode = 2
-mouse_filter = 2
 
 [node name="wheelFemale" parent="layout/MarginContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_gkba2")]
 layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="layout/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
 mouse_filter = 2
 
-[node name="newPup" type="Control" parent="layout/MarginContainer"]
+[node name="newPup" type="Control" parent="layout/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(260, 260)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_horizontal = 0
+size_flags_vertical = 8
 mouse_filter = 2
 
-[node name="targetPup" type="Control" parent="layout/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="layout/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="targetPup" type="Control" parent="layout/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(260, 260)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+mouse_filter = 2
 
 [node name="sidebarFemales" type="ScrollContainer" parent="layout"]
 custom_minimum_size = Vector2(260, 0)
@@ -115,3 +122,22 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="popupNewPup" type="BoxContainer" parent="."]
+custom_minimum_size = Vector2(520, 520)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = 60.0
+offset_right = 260.0
+offset_bottom = 580.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+alignment = 1

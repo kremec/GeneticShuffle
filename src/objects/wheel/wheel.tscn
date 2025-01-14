@@ -18,6 +18,7 @@ offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(250, 250)
+mouse_filter = 2
 script = ExtResource("1_2bwdd")
 
 [node name="wheel" type="TextureRect" parent="."]
@@ -34,6 +35,7 @@ offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(248, 248)
+mouse_filter = 2
 texture = ExtResource("2_alkvf")
 
 [node name="Alleles" type="Control" parent="."]
@@ -45,6 +47,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="alleles1" type="VBoxContainer" parent="Alleles"]
 custom_minimum_size = Vector2(45, 155)
@@ -61,6 +64,7 @@ offset_bottom = -75.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(22, 0)
+mouse_filter = 2
 theme_override_constants/separation = 10
 alignment = 1
 
@@ -80,6 +84,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = 0.785398
 pivot_offset = Vector2(22, 0)
+mouse_filter = 2
 
 [node name="alleles3" type="VBoxContainer" parent="Alleles"]
 custom_minimum_size = Vector2(45, 155)
@@ -96,6 +101,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = 1.5708
 pivot_offset = Vector2(22, 0)
+mouse_filter = 2
 theme_override_constants/separation = 10
 alignment = 1
 
@@ -115,6 +121,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = 2.35619
 pivot_offset = Vector2(22, 0)
+mouse_filter = 2
 
 [node name="alleles5" type="VBoxContainer" parent="Alleles"]
 custom_minimum_size = Vector2(45, 155)
@@ -132,6 +139,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = 3.14159
 pivot_offset = Vector2(22, 0)
+mouse_filter = 2
 theme_override_constants/separation = 10
 alignment = 1
 
@@ -151,6 +159,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = 3.92699
 pivot_offset = Vector2(22, 0)
+mouse_filter = 2
 
 [node name="alleles7" type="VBoxContainer" parent="Alleles"]
 custom_minimum_size = Vector2(45, 155)
@@ -167,6 +176,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = 4.71239
 pivot_offset = Vector2(22, 0)
+mouse_filter = 2
 theme_override_constants/separation = 10
 alignment = 1
 
@@ -186,3 +196,4 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = 5.49779
 pivot_offset = Vector2(22, 0)
+mouse_filter = 2

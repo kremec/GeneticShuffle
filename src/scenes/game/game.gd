@@ -4,6 +4,7 @@ var cardScene = preload("res://src/objects/card/card.tscn")
 
 var selectedMale: Card
 var selectedMaleIndex: int = -1
+
 var selectedFemale: Card
 var selectedFemaleIndex: int = -1
 
@@ -11,12 +12,15 @@ var newPup: Card
 var newPupSex: Card.Sex = Card.Sex.Male
 
 @onready var listMales = $layout/sidebarMales/listMales
+var numberAllMales: int = 0
 @onready var listFemales = $layout/sidebarFemales/listFemales
+var numberAllFemales: int = 0
 
 @onready var selectedMalePosition = $layout/MarginContainer/selectedMale
 @onready var selectedFemalePosition = $layout/MarginContainer/selectedFemale
-@onready var newPupPosition = $layout/MarginContainer/newPup
-@onready var targetPupPosition = $layout/MarginContainer/targetPup
+@onready var popupNewPupPosition = $popupNewPup
+@onready var newPupPosition = $layout/MarginContainer/HBoxContainer/newPup
+@onready var targetPupPosition = $layout/MarginContainer/HBoxContainer/targetPup
 
 @onready var btnSpin = $layout/MarginContainer/MarginContainer/btnSpin
 @onready var wheelMale = $layout/MarginContainer/MarginContainer/HBoxContainer/wheelMale
@@ -24,6 +28,8 @@ var newPupSex: Card.Sex = Card.Sex.Male
 var maleWheelSpinning: bool = false
 var femaleWheelSpinning: bool = false
 @export var wheelSpinSpeed: float = 360
+@export var afterWheelSpinPause: float = 1.0
+@export var newPupPresentPause: float = 1.0
 
 func _ready() -> void:
 	btnSpin.pressed.connect(_on_btnSpin_pressed)
@@ -32,26 +38,29 @@ func _ready() -> void:
 func round1() -> void:
 	var allelesShown: Array[bool] = [true, false, false]
 
-	# Starting guinea pigs
-	listMales.add_child(
-		create_card(
-			Card.Sex.Male,
-			Allele.AlleleCombo.DominantDominant,
-			Allele.AlleleCombo.RecessiveRecessive,
-			Allele.AlleleCombo.DominantDominant,
-			allelesShown
-		)
-	)
+	numberAllMales = 0
+	numberAllFemales = 0
 
-	listFemales.add_child(
-		create_card(
-			Card.Sex.Female,
-			Allele.AlleleCombo.DominantRecessive,
-			Allele.AlleleCombo.RecessiveRecessive,
-			Allele.AlleleCombo.DominantDominant,
-			allelesShown
-		)
+	# Starting guinea pigs
+	var male = create_card(
+		Card.Sex.Male,
+		Allele.AlleleCombo.DominantDominant,
+		Allele.AlleleCombo.RecessiveRecessive,
+		Allele.AlleleCombo.DominantDominant,
+		allelesShown
 	)
+	male.card_pressed.connect(_on_card_pressed)
+	listMales.add_child(male)
+
+	var female = create_card(
+		Card.Sex.Female,
+		Allele.AlleleCombo.DominantRecessive,
+		Allele.AlleleCombo.RecessiveRecessive,
+		Allele.AlleleCombo.DominantDominant,
+		allelesShown
+	)
+	female.card_pressed.connect(_on_card_pressed)
+	listFemales.add_child(female)
 
 	# Target pup
 	targetPupPosition.add_child(
@@ -61,6 +70,7 @@ func round1() -> void:
 			Allele.AlleleCombo.RecessiveRecessive,
 			Allele.AlleleCombo.DominantDominant,
 			allelesShown,
+			false,
 			false
 		)
 	)
@@ -86,12 +96,30 @@ func create_card(
 	furSwirlsAlleles: Allele.AlleleCombo,
 	furColourAlleles: Allele.AlleleCombo,
 	showAlleles: Array[bool] = [false, false, false],
-	pressable: bool = true,
+	clickable: bool = true,
+	increaseNumber: bool = true,
 ) -> Card:
+	if increaseNumber:
+		match sex:
+			Card.Sex.Male:
+				numberAllMales += 1
+			Card.Sex.Female:
+				numberAllFemales += 1
+	
 	var card = cardScene.instantiate()
-	card.Init(sex, furLengthAlleles, showAlleles[0], furSwirlsAlleles, showAlleles[1], furColourAlleles, showAlleles[2])
-	if pressable:
-		card.card_pressed.connect(_on_card_pressed)
+	card.Init(
+		sex,
+		furLengthAlleles,
+		showAlleles[0],
+		furSwirlsAlleles,
+		showAlleles[1],
+		furColourAlleles,
+		showAlleles[2],
+		numberAllMales if sex == Card.Sex.Male else numberAllFemales,
+		clickable
+	)
+	
+	
 	return card
 
 func _on_card_pressed(card: Card) -> void:
@@ -182,7 +210,7 @@ func _on_female_tween_finished() -> void:
 	
 func afterWheelsSpin():
 	# Wait
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(afterWheelSpinPause).timeout
 
 	# Get alleles from wheels
 	var pupLengthAlleles = null
@@ -228,10 +256,10 @@ func afterWheelsSpin():
 		pupSwirlsAlleles,
 		pupColorAlleles,
 		[selectedMale.showFurLengthAlleles, selectedMale.showFurSwirlsAlleles, selectedMale.showFurColorAlleles],
-		false
 	)
+	await get_tree().process_frame
 	newPup.scale = Vector2(0, 0)
-	newPupPosition.add_child(newPup)
+	popupNewPupPosition.add_child(newPup)
 
 	# Change sex for next pup
 	if newPupSex == Card.Sex.Male:
@@ -240,27 +268,56 @@ func afterWheelsSpin():
 		newPupSex = Card.Sex.Male
 	
 	# Scale up
-	var newPupTween = get_tree().create_tween()
-	newPupTween.tween_property(
+	var newPupScaleTween = get_tree().create_tween()
+	newPupScaleTween.tween_property(
 		newPup,
 		"scale",
 		Vector2(2, 2),
 		1.0
 	)
-	newPupTween.finished.connect(_on_newPup_tween_finished)
-	unselect_card(selectedMale)
-	unselect_card(selectedFemale)
-	maleWheelSpinning = false
-	femaleWheelSpinning = false
+	newPupScaleTween.finished.connect(_onNewPupPresent)
 
-func _on_newPup_tween_finished() -> void:
-	await get_tree().create_timer(1.0).timeout
+func _onNewPupPresent():
+	# Timeout
+	await get_tree().create_timer(newPupPresentPause).timeout
+
 	# Position
+	var newPupPositionTween = get_tree().create_tween()
+	newPupPositionTween.tween_property(
+		newPup,
+		"global_position",
+		newPupPosition.global_position,
+		0.5
+	)
+	# Scale
+	var newPupScaleTween = get_tree().create_tween()
+	newPupScaleTween.tween_property(
+		newPup,
+		"scale",
+		Vector2(1.0, 1.0),
+		0.5
+	)
+
+	newPupPositionTween.finished.connect(_onNewPupRepositioned)
+
+func _onNewPupRepositioned():
+	newPup.card_pressed.connect(_onNewPupClicked)
+
+func _onNewPupClicked(_card: Card):
+	newPup.card_pressed.disconnect(_onNewPupClicked)
+	# Reparent new pup into correct list
 	var cardNode = newPup.get_node(".")
 	match newPup.sex:
 		Card.Sex.Male:
 			cardNode.reparent(listMales, false)
 		Card.Sex.Female:
 			cardNode.reparent(listFemales, false)
+	
 	# Connect card_pressed
 	newPup.card_pressed.connect(_on_card_pressed)
+
+	# Unselect parents
+	unselect_card(selectedMale)
+	unselect_card(selectedFemale)
+	maleWheelSpinning = false
+	femaleWheelSpinning = false

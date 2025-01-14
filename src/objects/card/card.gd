@@ -11,6 +11,7 @@ enum Sex {
 
 @onready var button = $button
 @onready var image = $button/image
+@onready var numberLabel = $button/number
 @onready var lengthAllele1 = $button/HBoxContainer/allelesLength/lengthAllele1
 @onready var lengthAllele2 = $button/HBoxContainer/allelesLength/lengthAllele2
 @onready var swirlsAllele1 = $button/HBoxContainer/allelesSwirls/swirlsAllele1
@@ -19,6 +20,9 @@ enum Sex {
 @onready var colorAllele2 = $button/HBoxContainer/allelesColor/colorAllele2
 
 @export var selected: bool
+var clickable: bool = true
+
+@export var number: int
 
 @export var sex: Sex
 
@@ -49,7 +53,15 @@ func _ready() -> void:
 	colorAllele1.texture = alleleImages[4]
 	colorAllele2.texture = alleleImages[5]
 
-	# Button signal
+	if !clickable:
+		# Set not-clickable state
+		button.mouse_default_cursor_shape = CursorShape.CURSOR_ARROW
+		button.disabled = true
+	else:
+		# Set number
+		numberLabel.text = str(number)
+
+	# Create signal in all cases
 	button.pressed.connect(_on_button_pressed)
 
 func GetImageTexture() -> Resource:
@@ -147,7 +159,9 @@ func Init(
 	_furSwirlsAlleles: Allele.AlleleCombo,
 	_showFurSwirlsAlleles: bool,
 	_furColourAlleles: Allele.AlleleCombo,
-	_showFurColourAlleles: bool
+	_showFurColourAlleles: bool,
+	_number: int,
+	_clickable: bool = true
 ) -> void:
 	sex = _sex
 	furLengthAlleles = _furLengthAlleles
@@ -160,3 +174,6 @@ func Init(
 	furLength = Allele.GetFurLength(furLengthAlleles)
 	furSwirls = Allele.GetFurSwirls(furSwirlsAlleles)
 	furColor = Allele.GetFurColor(furColorAlleles)
+
+	number = _number
+	clickable = _clickable

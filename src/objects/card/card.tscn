@@ -1,10 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://bss7clukvsfxe"]
+[gd_scene load_steps=8 format=3 uid="uid://bss7clukvsfxe"]
 
 [ext_resource type="Script" path="res://src/objects/card/card.gd" id="1_gimfk"]
 [ext_resource type="Texture2D" uid="uid://brx3islm3co4a" path="res://assets/guinea_pig/long-noswirls-cream.png" id="2_lx4jp"]
+[ext_resource type="FontFile" uid="uid://djw4x7uisd0rl" path="res://assets/font/Aptos.ttf" id="3_5ir8t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buinq"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ic2ue"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xinse"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifh83"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -12,7 +29,7 @@ border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
+border_color = Color(0.686275, 0.686275, 0.686275, 1)
 
 [node name="Card" type="Control"]
 custom_minimum_size = Vector2(260, 260)
@@ -43,6 +60,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ic2ue")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xinse")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ifh83")
 
 [node name="MarginContainer" type="MarginContainer" parent="button"]
@@ -64,14 +84,28 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -120.0
-offset_top = 10.0
+offset_top = 31.0
 offset_right = 480.0
-offset_bottom = 460.0
+offset_bottom = 481.0
 grow_horizontal = 2
 scale = Vector2(0.4, 0.4)
 size_flags_horizontal = 3
 texture = ExtResource("2_lx4jp")
 expand_mode = 1
+
+[node name="number" type="Label" parent="button"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_5ir8t")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="button"]
 layout_mode = 1
