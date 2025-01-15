@@ -8,7 +8,6 @@ enum Sex {
 	Female
 }
 
-
 @onready var button = $button
 @onready var image = $button/image
 @onready var numberLabel = $button/number
@@ -25,6 +24,8 @@ var clickable: bool = true
 @export var number: int
 
 @export var sex: Sex
+var borderColorMale: Color = Color.LIGHT_BLUE
+var borderColorFemale: Color = Color.LIGHT_SALMON
 
 @export var furLength: Allele.FurLength
 @export var furLengthAlleles: Allele.AlleleCombo
@@ -43,6 +44,20 @@ func _ready() -> void:
 	image.texture = GetImageTexture()
 	if sex == Sex.Male:
 		image.flip_h = true
+
+	# Border color
+	var normalStyleBox: StyleBoxFlat = StyleBoxFlat.new()
+	normalStyleBox.bg_color = Color.TRANSPARENT
+	normalStyleBox.border_width_left = 5
+	normalStyleBox.border_width_top = 5
+	normalStyleBox.border_width_right = 5
+	normalStyleBox.border_width_bottom = 5
+	match sex:
+		Sex.Male:
+			normalStyleBox.border_color = Color.SKY_BLUE
+		Sex.Female:
+			normalStyleBox.border_color = Color.SALMON
+	button.add_theme_stylebox_override("normal", normalStyleBox)
 
 	# Allele images
 	var alleleImages = GetAlleleImages()

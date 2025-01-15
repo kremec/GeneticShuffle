@@ -31,6 +31,27 @@ var femaleWheelSpinning: bool = false
 @export var afterWheelSpinPause: float = 1.0
 @export var newPupPresentPause: float = 1.0
 
+@onready var alleleInfos = $layout/MarginContainer/HBoxContainer/AlleleInfos
+@onready var alleleInfoLeft = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft
+@onready var alleleInfoRight = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight
+@onready var alleleInfo1 = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1
+@onready var alleleInfo2 = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2
+@onready var alleleInfo3 = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3
+@onready var alleleInfo1DominantImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Dominant/alleleInfo1DominantImage
+@onready var alleleInfo1DominantLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Dominant/alleleInfo1DominantLabel
+@onready var alleleInfo1RecessiveImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Recessive/alleleInfo1RecessiveImage
+@onready var alleleInfo1RecessiveLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Recessive/alleleInfo1RecessiveLabel
+@onready var alleleInfo2DominantImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Dominant/alleleInfo2DominantImage
+@onready var alleleInfo2DominantLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Dominant/alleleInfo2DominantLabel
+@onready var alleleInfo2RecessiveImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Recessive/alleleInfo2RecessiveImage
+@onready var alleleInfo2RecessiveLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Recessive/alleleInfo2RecessiveLabel
+@onready var alleleInfo3DominantDominantImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3DominantDominant/alleleInfo3DominantDominantImage
+@onready var alleleInfo3DominantDominantLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3DominantDominant/alleleInfo3DominantDominantLabel
+@onready var alleleInfo3DominantRecessiveImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3DominantRecessive/alleleInfo3DominantRecessiveImage
+@onready var alleleInfo3DominantRecessiveLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3DominantRecessive/alleleInfo3DominantRecessiveLabel
+@onready var alleleInfo3RecessiveRecessiveImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3RecessiveRecessive/alleleInfo3RecessiveRecessiveImage
+@onready var alleleInfo3RecessiveRecessiveLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3RecessiveRecessive/alleleInfo3RecessiveRecessiveLabel
+
 func _ready() -> void:
 	btnSpin.pressed.connect(_on_btnSpin_pressed)
 	round1()
@@ -40,6 +61,14 @@ func round1() -> void:
 
 	numberAllMales = 0
 	numberAllFemales = 0
+
+	# Allele infos
+	alleleInfo1DominantImage.texture = load("res://assets/alleles/lengthDominant.png")
+	alleleInfo1DominantLabel.text = "Short fur (Dominant)"
+	alleleInfo1RecessiveImage.texture = load("res://assets/alleles/lengthRecessive.png")
+	alleleInfo1RecessiveLabel.text = "Long fur (Recessive)"
+	alleleInfo2.visible = false
+	alleleInfoRight.visible = false
 
 	# Starting guinea pigs
 	var male = create_card(

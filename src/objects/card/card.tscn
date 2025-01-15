@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bss7clukvsfxe"]
+[gd_scene load_steps=9 format=3 uid="uid://bss7clukvsfxe"]
 
 [ext_resource type="Script" path="res://src/objects/card/card.gd" id="1_gimfk"]
 [ext_resource type="Texture2D" uid="uid://brx3islm3co4a" path="res://assets/guinea_pig/long-noswirls-cream.png" id="2_lx4jp"]
@@ -22,6 +22,14 @@ border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xjat8"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.39276, 0.39276, 0.39276, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifh83"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -63,6 +71,7 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 theme_override_styles/disabled = SubResource("StyleBoxFlat_ic2ue")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xinse")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xjat8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ifh83")
 
 [node name="MarginContainer" type="MarginContainer" parent="button"]
@@ -104,7 +113,7 @@ offset_bottom = 48.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_5ir8t")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 horizontal_alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="button"]
