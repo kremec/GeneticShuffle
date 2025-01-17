@@ -84,3 +84,66 @@ static func StringAlleleType(alleleType: AlleleType) -> String:
 		AlleleType.Recessive:
 			alleleTypeString = "Recessive"
 	return alleleTypeString
+
+static func GenerateRandomAlleles() -> Array[AlleleCombo]:
+	var targetAlleles = GetRandomAlleleCombo([AlleleCombo.DominantDominant, AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive])
+	var maleAlleles = GetRandomAlleleCombo([AlleleCombo.DominantDominant, AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive])
+	var femaleAlleles: AlleleCombo
+
+	if targetAlleles == AlleleCombo.DominantDominant && maleAlleles == AlleleCombo.DominantDominant:
+		femaleAlleles = GetRandomAlleleCombo([AlleleCombo.DominantDominant, AlleleCombo.DominantRecessive])
+	elif targetAlleles == AlleleCombo.RecessiveRecessive && maleAlleles == AlleleCombo.RecessiveRecessive:
+		femaleAlleles = GetRandomAlleleCombo([AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive])
+	elif targetAlleles == AlleleCombo.DominantRecessive && maleAlleles == AlleleCombo.DominantDominant:
+		femaleAlleles = GetRandomAlleleCombo([AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive])
+	elif targetAlleles == AlleleCombo.DominantRecessive && maleAlleles == AlleleCombo.RecessiveRecessive:
+		femaleAlleles = GetRandomAlleleCombo([AlleleCombo.DominantDominant, AlleleCombo.DominantRecessive])
+	else:
+		femaleAlleles = GetRandomAlleleCombo([AlleleCombo.DominantDominant, AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive])
+	
+	return [targetAlleles, maleAlleles, femaleAlleles]
+
+
+static func GetRandomAlleleCombo(possibleCombos: Array[AlleleCombo]) -> AlleleCombo:
+	var combo: int = randi_range(0, possibleCombos.size() - 1)
+	return possibleCombos[combo]
+
+static var AlleleInfo = {
+	TraitType.Length: {
+		AlleleType.Dominant: {
+			"label": "Short fur (Dominant)",
+			"image": load("res://assets/alleles/lengthDominant.png")
+		},
+		AlleleType.Recessive: {
+			"label": "Long fur (Recessive)",
+			"image": load("res://assets/alleles/lengthRecessive.png")
+		}
+	},
+	TraitType.Swirls: {
+		AlleleType.Dominant: {
+			"label": "Swirls (Dominant)",
+			"image": load("res://assets/alleles/swirlsDominant.png")
+		},
+		AlleleType.Recessive: {
+			"label": "No swirls (Recessive)",
+			"image": load("res://assets/alleles/swirlsRecessive.png")
+		}
+	},
+	TraitType.Color: {
+		AlleleCombo.DominantDominant: {
+			"label": "Yellow hair",
+			"image1": load("res://assets/alleles/colorYellow.png"),
+			"image2": load("res://assets/alleles/colorYellow.png")
+		},
+		AlleleCombo.DominantRecessive: {
+			"label": "Cream hair",
+			"image1": load("res://assets/alleles/colorYellow.png"),
+			"image2": load("res://assets/alleles/colorWhite.png")
+		},
+		AlleleCombo.RecessiveRecessive: {
+			"label": "White hair",
+			"image1": load("res://assets/alleles/colorWhite.png"),
+			"image2": load("res://assets/alleles/colorWhite.png")
+		}
+	}
+}

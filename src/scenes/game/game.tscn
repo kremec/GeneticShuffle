@@ -119,33 +119,36 @@ size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="alleleInfo1Dominant" type="HBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1"]
+[node name="alleleInfo1Panel" type="VBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="alleleInfo1Dominant" type="HBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Panel"]
 layout_mode = 2
 theme_override_constants/separation = 10
-alignment = 1
 
-[node name="alleleInfo1DominantImage" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Dominant"]
+[node name="alleleInfo1DominantImage" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Panel/alleleInfo1Dominant"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 stretch_mode = 5
 
-[node name="alleleInfo1DominantLabel" type="Label" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Dominant"]
+[node name="alleleInfo1DominantLabel" type="Label" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Panel/alleleInfo1Dominant"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_mu3ax")
 theme_override_font_sizes/font_size = 40
 
-[node name="alleleInfo1Recessive" type="HBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1"]
+[node name="alleleInfo1Recessive" type="HBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Panel"]
 layout_mode = 2
 theme_override_constants/separation = 10
-alignment = 1
 
-[node name="alleleInfo1RecessiveImage" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Recessive"]
+[node name="alleleInfo1RecessiveImage" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Panel/alleleInfo1Recessive"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 stretch_mode = 5
 
-[node name="alleleInfo1RecessiveLabel" type="Label" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Recessive"]
+[node name="alleleInfo1RecessiveLabel" type="Label" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Panel/alleleInfo1Recessive"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_mu3ax")
@@ -157,33 +160,36 @@ size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="alleleInfo2Dominant" type="HBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2"]
+[node name="alleleInfo2Panel" type="VBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="alleleInfo2Dominant" type="HBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Panel"]
 layout_mode = 2
 theme_override_constants/separation = 10
-alignment = 1
 
-[node name="alleleInfo2DominantImage" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Dominant"]
+[node name="alleleInfo2DominantImage" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Panel/alleleInfo2Dominant"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 stretch_mode = 5
 
-[node name="alleleInfo2DominantLabel" type="Label" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Dominant"]
+[node name="alleleInfo2DominantLabel" type="Label" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Panel/alleleInfo2Dominant"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_mu3ax")
 theme_override_font_sizes/font_size = 40
 
-[node name="alleleInfo2Recessive" type="HBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2"]
+[node name="alleleInfo2Recessive" type="HBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Panel"]
 layout_mode = 2
 theme_override_constants/separation = 10
-alignment = 1
 
-[node name="alleleInfo2RecessiveImage" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Recessive"]
+[node name="alleleInfo2RecessiveImage" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Panel/alleleInfo2Recessive"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 stretch_mode = 5
 
-[node name="alleleInfo2RecessiveLabel" type="Label" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Recessive"]
+[node name="alleleInfo2RecessiveLabel" type="Label" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Panel/alleleInfo2Recessive"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_mu3ax")
@@ -200,49 +206,64 @@ size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="alleleInfo3DominantDominant" type="HBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3"]
+[node name="alleleInfo3Panel" type="VBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3"]
+layout_mode = 2
+
+[node name="alleleInfo3DominantDominant" type="HBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel"]
 layout_mode = 2
 theme_override_constants/separation = 10
-alignment = 1
 
-[node name="alleleInfo3DominantDominantImage" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3DominantDominant"]
+[node name="alleleInfo3DominantDominantImage1" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3DominantDominant"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 stretch_mode = 5
 
-[node name="alleleInfo3DominantDominantLabel" type="Label" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3DominantDominant"]
+[node name="alleleInfo3DominantDominantImage2" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3DominantDominant"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="alleleInfo3DominantDominantLabel" type="Label" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3DominantDominant"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_mu3ax")
 theme_override_font_sizes/font_size = 40
 
-[node name="alleleInfo3DominantRecessive" type="HBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3"]
+[node name="alleleInfo3DominantRecessive" type="HBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel"]
 layout_mode = 2
 theme_override_constants/separation = 10
-alignment = 1
 
-[node name="alleleInfo3DominantRecessiveImage" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3DominantRecessive"]
+[node name="alleleInfo3DominantRecessiveImage1" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3DominantRecessive"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 stretch_mode = 5
 
-[node name="alleleInfo3DominantRecessiveLabel" type="Label" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3DominantRecessive"]
+[node name="alleleInfo3DominantRecessiveImage2" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3DominantRecessive"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="alleleInfo3DominantRecessiveLabel" type="Label" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3DominantRecessive"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_mu3ax")
 theme_override_font_sizes/font_size = 40
 
-[node name="alleleInfo3RecessiveRecessive" type="HBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3"]
+[node name="alleleInfo3RecessiveRecessive" type="HBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel"]
 layout_mode = 2
 theme_override_constants/separation = 10
-alignment = 1
 
-[node name="alleleInfo3RecessiveRecessiveImage" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3RecessiveRecessive"]
+[node name="alleleInfo3RecessiveRecessiveImage1" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3RecessiveRecessive"]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 stretch_mode = 5
 
-[node name="alleleInfo3RecessiveRecessiveLabel" type="Label" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3RecessiveRecessive"]
+[node name="alleleInfo3RecessiveRecessiveImage2" type="TextureRect" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3RecessiveRecessive"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="alleleInfo3RecessiveRecessiveLabel" type="Label" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3RecessiveRecessive"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_mu3ax")

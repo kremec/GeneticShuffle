@@ -9,7 +9,7 @@ var selectedFemale: Card
 var selectedFemaleIndex: int = -1
 
 var newPup: Card
-var newPupSex: Card.Sex = Card.Sex.Male
+var newPupSex: Card.Sex
 
 @onready var listMales = $layout/sidebarMales/listMales
 var numberAllMales: int = 0
@@ -37,45 +37,72 @@ var femaleWheelSpinning: bool = false
 @onready var alleleInfo1 = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1
 @onready var alleleInfo2 = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2
 @onready var alleleInfo3 = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3
-@onready var alleleInfo1DominantImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Dominant/alleleInfo1DominantImage
-@onready var alleleInfo1DominantLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Dominant/alleleInfo1DominantLabel
-@onready var alleleInfo1RecessiveImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Recessive/alleleInfo1RecessiveImage
-@onready var alleleInfo1RecessiveLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Recessive/alleleInfo1RecessiveLabel
-@onready var alleleInfo2DominantImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Dominant/alleleInfo2DominantImage
-@onready var alleleInfo2DominantLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Dominant/alleleInfo2DominantLabel
-@onready var alleleInfo2RecessiveImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Recessive/alleleInfo2RecessiveImage
-@onready var alleleInfo2RecessiveLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Recessive/alleleInfo2RecessiveLabel
-@onready var alleleInfo3DominantDominantImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3DominantDominant/alleleInfo3DominantDominantImage
-@onready var alleleInfo3DominantDominantLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3DominantDominant/alleleInfo3DominantDominantLabel
-@onready var alleleInfo3DominantRecessiveImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3DominantRecessive/alleleInfo3DominantRecessiveImage
-@onready var alleleInfo3DominantRecessiveLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3DominantRecessive/alleleInfo3DominantRecessiveLabel
-@onready var alleleInfo3RecessiveRecessiveImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3RecessiveRecessive/alleleInfo3RecessiveRecessiveImage
-@onready var alleleInfo3RecessiveRecessiveLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3RecessiveRecessive/alleleInfo3RecessiveRecessiveLabel
+@onready var alleleInfo1DominantImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Panel/alleleInfo1Dominant/alleleInfo1DominantImage
+@onready var alleleInfo1DominantLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Panel/alleleInfo1Dominant/alleleInfo1DominantLabel
+@onready var alleleInfo1RecessiveImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Panel/alleleInfo1Recessive/alleleInfo1RecessiveImage
+@onready var alleleInfo1RecessiveLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo1/alleleInfo1Panel/alleleInfo1Recessive/alleleInfo1RecessiveLabel
+@onready var alleleInfo2DominantImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Panel/alleleInfo2Dominant/alleleInfo2DominantImage
+@onready var alleleInfo2DominantLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Panel/alleleInfo2Dominant/alleleInfo2DominantLabel
+@onready var alleleInfo2RecessiveImage = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Panel/alleleInfo2Recessive/alleleInfo2RecessiveImage
+@onready var alleleInfo2RecessiveLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft/alleleInfo2/alleleInfo2Panel/alleleInfo2Recessive/alleleInfo2RecessiveLabel
+@onready var alleleInfo3DominantDominantImage1 = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3DominantDominant/alleleInfo3DominantDominantImage1
+@onready var alleleInfo3DominantDominantImage2 = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3DominantDominant/alleleInfo3DominantDominantImage2
+@onready var alleleInfo3DominantDominantLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3DominantDominant/alleleInfo3DominantDominantLabel
+@onready var alleleInfo3DominantRecessiveImage1 = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3DominantRecessive/alleleInfo3DominantRecessiveImage1
+@onready var alleleInfo3DominantRecessiveImage2 = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3DominantRecessive/alleleInfo3DominantRecessiveImage2
+@onready var alleleInfo3DominantRecessiveLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3DominantRecessive/alleleInfo3DominantRecessiveLabel
+@onready var alleleInfo3RecessiveRecessiveImage1 = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3RecessiveRecessive/alleleInfo3RecessiveRecessiveImage1
+@onready var alleleInfo3RecessiveRecessiveImage2 = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3RecessiveRecessive/alleleInfo3RecessiveRecessiveImage2
+@onready var alleleInfo3RecessiveRecessiveLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3RecessiveRecessive/alleleInfo3RecessiveRecessiveLabel
 
 func _ready() -> void:
 	btnSpin.pressed.connect(_on_btnSpin_pressed)
-	round1()
+	round5()
+
+var allAlleleCombos: Array[Allele.AlleleCombo] = [Allele.AlleleCombo.DominantDominant, Allele.AlleleCombo.DominantRecessive, Allele.AlleleCombo.RecessiveRecessive]
 
 func round1() -> void:
 	var allelesShown: Array[bool] = [true, false, false]
+	startRound(allelesShown)
 
+func round2() -> void:
+	var allelesShown: Array[bool] = [false, true, false]
+	startRound(allelesShown)
+
+func round3() -> void:
+	var allelesShown: Array[bool] = [false, false, true]
+	startRound(allelesShown)
+
+func round4() -> void:
+	var allelesShown: Array[bool] = [true, true, false]
+	startRound(allelesShown)
+
+func round5() -> void:
+	var allelesShown: Array[bool] = [true, true, true]
+	startRound(allelesShown)
+
+func startRound(allelesShown: Array[bool]):
 	numberAllMales = 0
 	numberAllFemales = 0
 
+	# Random new pup sex
+	newPupSex = [Card.Sex.Male, Card.Sex.Female][randi_range(0, 1)]
+
 	# Allele infos
-	alleleInfo1DominantImage.texture = load("res://assets/alleles/lengthDominant.png")
-	alleleInfo1DominantLabel.text = "Short fur (Dominant)"
-	alleleInfo1RecessiveImage.texture = load("res://assets/alleles/lengthRecessive.png")
-	alleleInfo1RecessiveLabel.text = "Long fur (Recessive)"
-	alleleInfo2.visible = false
-	alleleInfoRight.visible = false
+	setAlleleInfos(allelesShown)
+
+	# Generate random alleles
+	var defaultAlleles = [Allele.GetRandomAlleleCombo(allAlleleCombos), Allele.GetRandomAlleleCombo(allAlleleCombos), Allele.GetRandomAlleleCombo(allAlleleCombos)]
+	var randomAllelesLength = Allele.GenerateRandomAlleles()
+	var randomAllelesSwirls = Allele.GenerateRandomAlleles()
+	var randomAllelesColor = Allele.GenerateRandomAlleles()
 
 	# Starting guinea pigs
 	var male = create_card(
 		Card.Sex.Male,
-		Allele.AlleleCombo.DominantDominant,
-		Allele.AlleleCombo.RecessiveRecessive,
-		Allele.AlleleCombo.DominantDominant,
+		randomAllelesLength[1] if allelesShown else defaultAlleles[1],
+		randomAllelesSwirls[1] if allelesShown else defaultAlleles[1],
+		randomAllelesColor[1] if allelesShown else defaultAlleles[1],
 		allelesShown
 	)
 	male.card_pressed.connect(_on_card_pressed)
@@ -83,9 +110,9 @@ func round1() -> void:
 
 	var female = create_card(
 		Card.Sex.Female,
-		Allele.AlleleCombo.DominantRecessive,
-		Allele.AlleleCombo.RecessiveRecessive,
-		Allele.AlleleCombo.DominantDominant,
+		randomAllelesLength[2] if allelesShown else defaultAlleles[2],
+		randomAllelesSwirls[2] if allelesShown else defaultAlleles[2],
+		randomAllelesColor[2] if allelesShown else defaultAlleles[2],
 		allelesShown
 	)
 	female.card_pressed.connect(_on_card_pressed)
@@ -95,9 +122,9 @@ func round1() -> void:
 	targetPupPosition.add_child(
 		create_card(
 			Card.Sex.Male,
-			Allele.AlleleCombo.RecessiveRecessive,
-			Allele.AlleleCombo.RecessiveRecessive,
-			Allele.AlleleCombo.DominantDominant,
+			randomAllelesLength[0] if allelesShown else defaultAlleles[0],
+			randomAllelesSwirls[0] if allelesShown else defaultAlleles[0],
+			randomAllelesColor[0] if allelesShown else defaultAlleles[0],
 			allelesShown,
 			false,
 			false
@@ -105,6 +132,95 @@ func round1() -> void:
 	)
 
 	# Wheel
+	resetWheels(allelesShown)
+
+func setAlleleInfos(allelesShown: Array[bool]):
+	alleleInfoLeft.visible = true
+	alleleInfoRight.visible = true
+	alleleInfo1.visible = true
+	alleleInfo2.visible = true
+	alleleInfo3.visible = true
+	match allelesShown.count(true):
+		1:
+			if allelesShown[0]:
+				alleleInfo1DominantImage.texture = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Dominant]["image"]
+				alleleInfo1DominantLabel.text = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Dominant]["label"]
+				alleleInfo1RecessiveImage.texture = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Recessive]["image"]
+				alleleInfo1RecessiveLabel.text = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Recessive]["label"]
+				alleleInfo2.visible = false
+				alleleInfoRight.visible = false
+			elif allelesShown[1]:
+				alleleInfo1DominantImage.texture = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Dominant]["image"]
+				alleleInfo1DominantLabel.text = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Dominant]["label"]
+				alleleInfo1RecessiveImage.texture = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Recessive]["image"]
+				alleleInfo1RecessiveLabel.text = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Recessive]["label"]
+				alleleInfo2.visible = false
+				alleleInfoRight.visible = false
+			elif allelesShown[2]:
+				alleleInfo3DominantDominantImage1.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantDominant]["image1"]
+				alleleInfo3DominantDominantImage2.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantDominant]["image2"]
+				alleleInfo3DominantDominantLabel.text = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantDominant]["label"]
+				alleleInfo3DominantRecessiveImage1.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantRecessive]["image1"]
+				alleleInfo3DominantRecessiveImage2.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantRecessive]["image2"]
+				alleleInfo3DominantRecessiveLabel.text = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantRecessive]["label"]
+				alleleInfo3RecessiveRecessiveImage1.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.RecessiveRecessive]["image1"]
+				alleleInfo3RecessiveRecessiveImage2.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.RecessiveRecessive]["image2"]
+				alleleInfo3RecessiveRecessiveLabel.text = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.RecessiveRecessive]["label"]
+				alleleInfoLeft.visible = false
+			
+		2:
+			if allelesShown[2]:
+				alleleInfo3DominantDominantImage1.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantDominant]["image1"]
+				alleleInfo3DominantDominantImage2.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantDominant]["image2"]
+				alleleInfo3DominantDominantLabel.text = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantDominant]["label"]
+				alleleInfo3DominantRecessiveImage1.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantRecessive]["image1"]
+				alleleInfo3DominantRecessiveImage2.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantRecessive]["image2"]
+				alleleInfo3DominantRecessiveLabel.text = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantRecessive]["label"]
+				alleleInfo3RecessiveRecessiveImage1.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.RecessiveRecessive]["image1"]
+				alleleInfo3RecessiveRecessiveImage2.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.RecessiveRecessive]["image2"]
+				alleleInfo3RecessiveRecessiveLabel.text = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.RecessiveRecessive]["label"]
+				if allelesShown[0]:
+					alleleInfo1DominantImage.texture = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Dominant]["image"]
+					alleleInfo1DominantLabel.text = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Dominant]["label"]
+					alleleInfo1RecessiveImage.texture = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Recessive]["image"]
+					alleleInfo1RecessiveLabel.text = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Recessive]["label"]
+				elif allelesShown[1]:
+					alleleInfo1DominantImage.texture = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Dominant]["image"]
+					alleleInfo1DominantLabel.text = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Dominant]["label"]
+					alleleInfo1RecessiveImage.texture = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Recessive]["image"]
+					alleleInfo1RecessiveLabel.text = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Recessive]["label"]
+				alleleInfo2.visible = false
+			else:
+				alleleInfo1DominantImage.texture = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Dominant]["image"]
+				alleleInfo1DominantLabel.text = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Dominant]["label"]
+				alleleInfo1RecessiveImage.texture = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Recessive]["image"]
+				alleleInfo1RecessiveLabel.text = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Recessive]["label"]
+				alleleInfo2DominantImage.texture = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Dominant]["image"]
+				alleleInfo2DominantLabel.text = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Dominant]["label"]
+				alleleInfo2RecessiveImage.texture = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Recessive]["image"]
+				alleleInfo2RecessiveLabel.text = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Recessive]["label"]
+				alleleInfoRight.visible = false
+
+		3:
+			alleleInfo1DominantImage.texture = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Dominant]["image"]
+			alleleInfo1DominantLabel.text = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Dominant]["label"]
+			alleleInfo1RecessiveImage.texture = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Recessive]["image"]
+			alleleInfo1RecessiveLabel.text = Allele.AlleleInfo[Allele.TraitType.Length][Allele.AlleleType.Recessive]["label"]
+			alleleInfo2DominantImage.texture = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Dominant]["image"]
+			alleleInfo2DominantLabel.text = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Dominant]["label"]
+			alleleInfo2RecessiveImage.texture = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Recessive]["image"]
+			alleleInfo2RecessiveLabel.text = Allele.AlleleInfo[Allele.TraitType.Swirls][Allele.AlleleType.Recessive]["label"]
+			alleleInfo3DominantDominantImage1.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantDominant]["image1"]
+			alleleInfo3DominantDominantImage2.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantDominant]["image2"]
+			alleleInfo3DominantDominantLabel.text = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantDominant]["label"]
+			alleleInfo3DominantRecessiveImage1.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantRecessive]["image1"]
+			alleleInfo3DominantRecessiveImage2.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantRecessive]["image2"]
+			alleleInfo3DominantRecessiveLabel.text = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.DominantRecessive]["label"]
+			alleleInfo3RecessiveRecessiveImage1.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.RecessiveRecessive]["image1"]
+			alleleInfo3RecessiveRecessiveImage2.texture = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.RecessiveRecessive]["image2"]
+			alleleInfo3RecessiveRecessiveLabel.text = Allele.AlleleInfo[Allele.TraitType.Color][Allele.AlleleCombo.RecessiveRecessive]["label"]
+
+func resetWheels(allelesShown: Array[bool]):
 	wheelMale.ResetAlleles()
 	wheelFemale.ResetAlleles()
 
