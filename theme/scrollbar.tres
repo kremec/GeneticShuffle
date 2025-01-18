@@ -1,0 +1,45 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://k4a7qn27mcm8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vddyb"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 15
+border_width_right = 15
+border_color = Color(1, 1, 1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5iub"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_imriq"]
+bg_color = Color(0.882353, 0.882353, 0.882353, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2imhn"]
+bg_color = Color(0.843137, 0.843137, 0.843137, 0.843137)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvavo"]
+bg_color = Color(0.764706, 0.764706, 0.764706, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3bbiw"]
+bg_color = Color(1, 1, 1, 0)
+border_width_right = 15
+border_color = Color(1, 1, 1, 0)
+
+[resource]
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_vddyb")
+ScrollContainer/styles/panel = SubResource("StyleBoxFlat_n5iub")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_imriq")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_2imhn")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_kvavo")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_3bbiw")

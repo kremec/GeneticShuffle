@@ -1,6 +1,6 @@
 extends Control
 
-@onready var btnExit = $VBoxContainer/HBoxContainer/btnExit
+@onready var btnExit = $btnExit
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

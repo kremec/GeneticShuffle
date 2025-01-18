@@ -85,9 +85,8 @@ static func StringAlleleType(alleleType: AlleleType) -> String:
 			alleleTypeString = "Recessive"
 	return alleleTypeString
 
-static func GenerateRandomAlleles() -> Array[AlleleCombo]:
-	var targetAlleles = GetRandomAlleleCombo([AlleleCombo.DominantDominant, AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive])
-	var otherPossibleAlleles = [AlleleCombo.DominantDominant, AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive]
+static func GenerateRandomAlleles(targetAlleles: AlleleCombo) -> Array[AlleleCombo]:
+	var otherPossibleAlleles: Array[AlleleCombo] = [AlleleCombo.DominantDominant, AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive]
 	otherPossibleAlleles.erase(targetAlleles)
 	var maleAlleles = GetRandomAlleleCombo(otherPossibleAlleles)
 	var femaleAlleles: AlleleCombo

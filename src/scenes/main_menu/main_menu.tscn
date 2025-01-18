@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqubu87pvq7nq"]
+[gd_scene load_steps=11 format=3 uid="uid://cqubu87pvq7nq"]
 
 [ext_resource type="Script" path="res://src/scenes/main_menu/main_menu.gd" id="1_j8h2n"]
 [ext_resource type="Texture2D" uid="uid://brx3islm3co4a" path="res://assets/guinea_pig/long-noswirls-cream.png" id="1_jpkbo"]
@@ -8,6 +8,32 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_urxpa"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0u5ps"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u3s41"]
+bg_color = Color(0.884037, 0.884037, 0.884037, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4rfe"]
+bg_color = Color(0.764706, 0.764706, 0.764706, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cwkj3"]
 bg_color = Color(1, 1, 1, 1)
@@ -113,9 +139,16 @@ offset_left = 829.0
 offset_top = 792.0
 offset_right = 1329.0
 offset_bottom = 992.0
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_lr2ss")
 theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0u5ps")
+theme_override_styles/hover = SubResource("StyleBoxFlat_u3s41")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_s4rfe")
 theme_override_styles/normal = SubResource("StyleBoxFlat_cwkj3")
 text = "Start"
 
@@ -125,8 +158,15 @@ offset_left = 1353.0
 offset_top = 792.0
 offset_right = 1853.0
 offset_bottom = 992.0
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_lr2ss")
 theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0u5ps")
+theme_override_styles/hover = SubResource("StyleBoxFlat_u3s41")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_s4rfe")
 theme_override_styles/normal = SubResource("StyleBoxFlat_cwkj3")
 text = "  How to play  "

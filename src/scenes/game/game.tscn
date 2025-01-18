@@ -1,11 +1,50 @@
-[gd_scene load_steps=5 format=3 uid="uid://clqgk4akh3gfv"]
+[gd_scene load_steps=10 format=3 uid="uid://clqgk4akh3gfv"]
 
 [ext_resource type="Script" path="res://src/scenes/game/game.gd" id="1_eim4h"]
 [ext_resource type="PackedScene" uid="uid://dku5r3f77amfb" path="res://src/objects/wheel/wheel.tscn" id="2_gkba2"]
+[ext_resource type="Theme" uid="uid://k4a7qn27mcm8" path="res://theme/scrollbar.tres" id="2_hvv7x"]
 [ext_resource type="FontFile" uid="uid://djw4x7uisd0rl" path="res://assets/font/Aptos.ttf" id="3_mu3ax"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vo3v"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c04hi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b35jr"]
+bg_color = Color(0.884037, 0.884037, 0.884037, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ak267"]
+bg_color = Color(0.764706, 0.764706, 0.764706, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f04lh"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -35,9 +74,10 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="sidebarMales" type="ScrollContainer" parent="layout"]
-custom_minimum_size = Vector2(260, 0)
+custom_minimum_size = Vector2(275, 0)
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("2_hvv7x")
 
 [node name="listMales" type="VBoxContainer" parent="layout/sidebarMales"]
 layout_mode = 2
@@ -79,11 +119,22 @@ size_flags_vertical = 4
 theme_override_constants/margin_top = 0
 
 [node name="btnSpin" type="Button" parent="layout/MarginContainer/MarginContainer"]
+custom_minimum_size = Vector2(150, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_mu3ax")
 theme_override_font_sizes/font_size = 30
-text = "SPIN"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c04hi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_b35jr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ak267")
+theme_override_styles/normal = SubResource("StyleBoxFlat_f04lh")
+text = "Spin"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="layout/MarginContainer/MarginContainer"]
 layout_mode = 2
@@ -288,9 +339,10 @@ size_flags_vertical = 8
 mouse_filter = 2
 
 [node name="sidebarFemales" type="ScrollContainer" parent="layout"]
-custom_minimum_size = Vector2(260, 0)
+custom_minimum_size = Vector2(275, 0)
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("2_hvv7x")
 
 [node name="listFemales" type="VBoxContainer" parent="layout/sidebarFemales"]
 layout_mode = 2
