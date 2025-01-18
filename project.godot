@@ -14,8 +14,7 @@ config/name="Genetic Shuffle"
 run/main_scene="res://src/scenes/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 boot_splash/bg_color=Color(1, 1, 1, 1)
-boot_splash/show_image=false
-boot_splash/fullsize=false
+boot_splash/image="res://icon.svg"
 boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
@@ -38,3 +37,4 @@ theme/default_font_multichannel_signed_distance_field=true
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
