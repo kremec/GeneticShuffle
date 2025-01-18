@@ -10,9 +10,13 @@ config_version=5
 
 [application]
 
-config/name="GeneticShuffle"
+config/name="Genetic Shuffle"
 run/main_scene="res://src/scenes/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
 [debug]
