@@ -8,6 +8,8 @@ var selectedMaleIndex: int = -1
 var selectedFemale: Card
 var selectedFemaleIndex: int = -1
 
+var targetAlleles: Array[Allele.AlleleCombo]
+
 var newPup: Card
 var newPupSex: Card.Sex
 
@@ -25,11 +27,12 @@ var numberAllFemales: int = 0
 @onready var btnSpin = $layout/MarginContainer/MarginContainer/btnSpin
 @onready var wheelMale = $layout/MarginContainer/MarginContainer/HBoxContainer/wheelMale
 @onready var wheelFemale = $layout/MarginContainer/MarginContainer/HBoxContainer/wheelFemale
+var canWheelSpin: bool = true
 var maleWheelSpinning: bool = false
 var femaleWheelSpinning: bool = false
 @export var wheelSpinSpeed: float = 360
-@export var afterWheelSpinPause: float = 1.0
-@export var newPupPresentPause: float = 1.0
+@export var afterWheelSpinPause: float = 0.5
+@export var newPupPresentPause: float = 0.5
 
 @onready var alleleInfos = $layout/MarginContainer/HBoxContainer/AlleleInfos
 @onready var alleleInfoLeft = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoLeft
@@ -55,11 +58,27 @@ var femaleWheelSpinning: bool = false
 @onready var alleleInfo3RecessiveRecessiveImage2 = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3RecessiveRecessive/alleleInfo3RecessiveRecessiveImage2
 @onready var alleleInfo3RecessiveRecessiveLabel = $layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel/alleleInfo3RecessiveRecessive/alleleInfo3RecessiveRecessiveLabel
 
+@onready var level: Label = $layout/MarginContainer/level
+
 func _ready() -> void:
 	btnSpin.pressed.connect(_on_btnSpin_pressed)
-	round5()
+	loadRound()
 
-var allAlleleCombos: Array[Allele.AlleleCombo] = [Allele.AlleleCombo.DominantDominant, Allele.AlleleCombo.DominantRecessive, Allele.AlleleCombo.RecessiveRecessive]
+var currentRound: int = 1
+func loadRound():
+	level.text = "Level " + str(currentRound)
+	if currentRound == 1:
+		round1()
+	elif currentRound == 2:
+		round2()
+	elif currentRound == 3:
+		round3()
+	elif currentRound == 4:
+		round4()
+	elif currentRound == 5:
+		round5()
+	else:
+		get_tree().change_scene_to_file("res://src/scenes/main_menu/main_menu.tscn")
 
 func round1() -> void:
 	var allelesShown: Array[bool] = [true, false, false]
@@ -82,8 +101,18 @@ func round5() -> void:
 	startRound(allelesShown)
 
 func startRound(allelesShown: Array[bool]):
+	canWheelSpin = true
 	numberAllMales = 0
 	numberAllFemales = 0
+	selectedMale = null
+	selectedFemale = null
+	for n in listMales.get_children(): n.queue_free()
+	for n in listFemales.get_children(): n.queue_free()
+	for n in selectedMalePosition.get_children(): n.queue_free()
+	for n in selectedFemalePosition.get_children(): n.queue_free()
+	for n in popupNewPupPosition.get_children(): n.queue_free()
+	for n in newPupPosition.get_children(): n.queue_free()
+	for n in targetPupPosition.get_children(): n.queue_free()
 
 	# Random new pup sex
 	newPupSex = [Card.Sex.Male, Card.Sex.Female][randi_range(0, 1)]
@@ -92,6 +121,7 @@ func startRound(allelesShown: Array[bool]):
 	setAlleleInfos(allelesShown)
 
 	# Generate random alleles
+	var allAlleleCombos: Array[Allele.AlleleCombo] = [Allele.AlleleCombo.DominantDominant, Allele.AlleleCombo.DominantRecessive, Allele.AlleleCombo.RecessiveRecessive]
 	var defaultAlleles = [Allele.GetRandomAlleleCombo(allAlleleCombos), Allele.GetRandomAlleleCombo(allAlleleCombos), Allele.GetRandomAlleleCombo(allAlleleCombos)]
 	var randomAllelesLength = Allele.GenerateRandomAlleles()
 	var randomAllelesSwirls = Allele.GenerateRandomAlleles()
@@ -100,9 +130,9 @@ func startRound(allelesShown: Array[bool]):
 	# Starting guinea pigs
 	var male = create_card(
 		Card.Sex.Male,
-		randomAllelesLength[1] if allelesShown else defaultAlleles[1],
-		randomAllelesSwirls[1] if allelesShown else defaultAlleles[1],
-		randomAllelesColor[1] if allelesShown else defaultAlleles[1],
+		randomAllelesLength[1] if allelesShown[0] else defaultAlleles[0],
+		randomAllelesSwirls[1] if allelesShown[1] else defaultAlleles[1],
+		randomAllelesColor[1] if allelesShown[2] else defaultAlleles[2],
 		allelesShown
 	)
 	male.card_pressed.connect(_on_card_pressed)
@@ -110,21 +140,28 @@ func startRound(allelesShown: Array[bool]):
 
 	var female = create_card(
 		Card.Sex.Female,
-		randomAllelesLength[2] if allelesShown else defaultAlleles[2],
-		randomAllelesSwirls[2] if allelesShown else defaultAlleles[2],
-		randomAllelesColor[2] if allelesShown else defaultAlleles[2],
+		randomAllelesLength[2] if allelesShown[0] else defaultAlleles[0],
+		randomAllelesSwirls[2] if allelesShown[1] else defaultAlleles[1],
+		randomAllelesColor[2] if allelesShown[2] else defaultAlleles[2],
 		allelesShown
 	)
 	female.card_pressed.connect(_on_card_pressed)
 	listFemales.add_child(female)
 
+	# Target alleles
+	targetAlleles = [
+		randomAllelesLength[0] if allelesShown[0] else defaultAlleles[0],
+		randomAllelesSwirls[0] if allelesShown[1] else defaultAlleles[1],
+		randomAllelesColor[0] if allelesShown[2] else defaultAlleles[2]
+	]
+
 	# Target pup
 	targetPupPosition.add_child(
 		create_card(
 			Card.Sex.Male,
-			randomAllelesLength[0] if allelesShown else defaultAlleles[0],
-			randomAllelesSwirls[0] if allelesShown else defaultAlleles[0],
-			randomAllelesColor[0] if allelesShown else defaultAlleles[0],
+			targetAlleles[0] if allelesShown[0] else defaultAlleles[0],
+			targetAlleles[1] if allelesShown[1] else defaultAlleles[1],
+			targetAlleles[2] if allelesShown[2] else defaultAlleles[2],
 			allelesShown,
 			false,
 			false
@@ -299,7 +336,7 @@ func select_card(card: Card):
 	cardNode.set_position(Vector2(0, 0))
 
 func unselect_card(card: Card):
-	if !card.selected: return
+	if !card.selected || !canWheelSpin: return
 	if card.sex == Card.Sex.Male && selectedMale == null: return
 	if card.sex == Card.Sex.Female && selectedFemale == null: return
 	# Position
@@ -332,8 +369,9 @@ func _input(event: InputEvent) -> void:
 			wheelsSpin()
 
 func wheelsSpin() -> void:
-	if selectedMale == null || selectedFemale == null || maleWheelSpinning || femaleWheelSpinning:
+	if selectedMale == null || selectedFemale == null || maleWheelSpinning || femaleWheelSpinning || !canWheelSpin:
 		return
+	canWheelSpin = false
 	maleWheelSpinning = true
 	femaleWheelSpinning = true
 
@@ -369,8 +407,6 @@ func afterWheelsSpin():
 		var maleAlleleType: Allele.AlleleType = maleAlleles[i][1]
 		var femaleAlleleType: Allele.AlleleType = femaleAlleles[i][1]
 
-		print(Allele.StringTraitType(traitType), " - Male: ", Allele.StringAlleleType(maleAlleleType), ", Female: ", Allele.StringAlleleType(femaleAlleleType))
-
 		var alleleCombo: Allele.AlleleCombo
 		if maleAlleleType == Allele.AlleleType.Dominant && femaleAlleleType == Allele.AlleleType.Dominant:
 			alleleCombo = Allele.AlleleCombo.DominantDominant
@@ -386,7 +422,7 @@ func afterWheelsSpin():
 				pupSwirlsAlleles = alleleCombo
 			Allele.TraitType.Color:
 				pupColorAlleles = alleleCombo
-	print("\n")
+	
 	if pupLengthAlleles == null:
 		pupLengthAlleles = selectedMale.furLengthAlleles
 	if pupSwirlsAlleles == null:
@@ -426,6 +462,12 @@ func _onNewPupPresent():
 	# Timeout
 	await get_tree().create_timer(newPupPresentPause).timeout
 
+	# If pup is the target start new round
+	if newPup.furLengthAlleles == targetAlleles[0] && newPup.furSwirlsAlleles == targetAlleles[1] && newPup.furColorAlleles == targetAlleles[2]:
+		currentRound += 1
+		loadRound()
+		return
+
 	# Position
 	var newPupPositionTween = get_tree().create_tween()
 	newPupPositionTween.tween_property(
@@ -462,7 +504,6 @@ func _onNewPupClicked(_card: Card):
 	newPup.card_pressed.connect(_on_card_pressed)
 
 	# Unselect parents
+	canWheelSpin = true
 	unselect_card(selectedMale)
 	unselect_card(selectedFemale)
-	maleWheelSpinning = false
-	femaleWheelSpinning = false

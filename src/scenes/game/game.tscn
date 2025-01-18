@@ -65,6 +65,14 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
+[node name="level" type="Label" parent="layout/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 75
+text = "Level 1"
+
 [node name="MarginContainer" type="MarginContainer" parent="layout/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 4
@@ -106,6 +114,7 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="AlleleInfoLeft" type="VBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos"]
@@ -208,6 +217,8 @@ alignment = 1
 
 [node name="alleleInfo3Panel" type="VBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="alleleInfo3DominantDominant" type="HBoxContainer" parent="layout/MarginContainer/HBoxContainer/AlleleInfos/AlleleInfoRight/alleleInfo3/alleleInfo3Panel"]
 layout_mode = 2

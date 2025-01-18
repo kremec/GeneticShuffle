@@ -173,16 +173,6 @@ func setAllelePositions(
 		alleles[positionNodes[i]].append(newAlleles[i])
 		alleleImages[positionNodes[i]].add_child(createAlleleImageNode(images[i]))
 
-	var debugWheelAlleles = false
-	if debugWheelAlleles:
-		for key in alleles.keys():
-			var string: String = ""
-			string += str(key) + ": "
-			for allele in alleles[key]:
-				string += "  " + Allele.StringTraitType(allele[0]) + " - " + Allele.StringAlleleType(allele[1])
-			print(string)
-		print("\n")
-
 func createAlleleImageNode(image: Texture) -> Node:
 	var boxContainer: BoxContainer = BoxContainer.new()
 	boxContainer.size_flags_vertical = Control.SizeFlags.SIZE_EXPAND_FILL
@@ -198,14 +188,14 @@ func ResetAlleles():
 	for key in alleles.keys():
 		alleles[key].clear()
 	
-	for n in $Alleles/alleles1.get_children(): $Alleles/alleles1.remove_child(n)
-	for n in $Alleles/alleles2.get_children(): $Alleles/alleles2.remove_child(n)
-	for n in $Alleles/alleles3.get_children(): $Alleles/alleles3.remove_child(n)
-	for n in $Alleles/alleles4.get_children(): $Alleles/alleles4.remove_child(n)
-	for n in $Alleles/alleles5.get_children(): $Alleles/alleles5.remove_child(n)
-	for n in $Alleles/alleles6.get_children(): $Alleles/alleles6.remove_child(n)
-	for n in $Alleles/alleles7.get_children(): $Alleles/alleles7.remove_child(n)
-	for n in $Alleles/alleles8.get_children(): $Alleles/alleles8.remove_child(n)
+	for n in $Alleles/alleles1.get_children(): n.queue_free()
+	for n in $Alleles/alleles2.get_children(): n.queue_free()
+	for n in $Alleles/alleles3.get_children(): n.queue_free()
+	for n in $Alleles/alleles4.get_children(): n.queue_free()
+	for n in $Alleles/alleles5.get_children(): n.queue_free()
+	for n in $Alleles/alleles6.get_children(): n.queue_free()
+	for n in $Alleles/alleles7.get_children(): n.queue_free()
+	for n in $Alleles/alleles8.get_children(): n.queue_free()
 
 func Spin():
 	var rotationAngle: float = randf_range(360, 360 * 3)

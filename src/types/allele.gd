@@ -87,20 +87,33 @@ static func StringAlleleType(alleleType: AlleleType) -> String:
 
 static func GenerateRandomAlleles() -> Array[AlleleCombo]:
 	var targetAlleles = GetRandomAlleleCombo([AlleleCombo.DominantDominant, AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive])
-	var maleAlleles = GetRandomAlleleCombo([AlleleCombo.DominantDominant, AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive])
+	var otherPossibleAlleles = [AlleleCombo.DominantDominant, AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive]
+	otherPossibleAlleles.erase(targetAlleles)
+	var maleAlleles = GetRandomAlleleCombo(otherPossibleAlleles)
 	var femaleAlleles: AlleleCombo
 
-	if targetAlleles == AlleleCombo.DominantDominant && maleAlleles == AlleleCombo.DominantDominant:
-		femaleAlleles = GetRandomAlleleCombo([AlleleCombo.DominantDominant, AlleleCombo.DominantRecessive])
-	elif targetAlleles == AlleleCombo.RecessiveRecessive && maleAlleles == AlleleCombo.RecessiveRecessive:
-		femaleAlleles = GetRandomAlleleCombo([AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive])
-	elif targetAlleles == AlleleCombo.DominantRecessive && maleAlleles == AlleleCombo.DominantDominant:
-		femaleAlleles = GetRandomAlleleCombo([AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive])
-	elif targetAlleles == AlleleCombo.DominantRecessive && maleAlleles == AlleleCombo.RecessiveRecessive:
-		femaleAlleles = GetRandomAlleleCombo([AlleleCombo.DominantDominant, AlleleCombo.DominantRecessive])
-	else:
-		femaleAlleles = GetRandomAlleleCombo([AlleleCombo.DominantDominant, AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive])
-	
+	match targetAlleles:
+		AlleleCombo.DominantDominant:
+			match maleAlleles:
+				AlleleCombo.RecessiveRecessive:
+					femaleAlleles = AlleleCombo.DominantRecessive
+				_:
+					femaleAlleles = GetRandomAlleleCombo([AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive])
+		AlleleCombo.RecessiveRecessive:
+			match maleAlleles:
+				AlleleCombo.DominantDominant:
+					femaleAlleles = AlleleCombo.DominantRecessive
+				_:
+					femaleAlleles = GetRandomAlleleCombo([AlleleCombo.DominantDominant, AlleleCombo.DominantRecessive])
+		AlleleCombo.DominantRecessive:
+			match maleAlleles:
+				AlleleCombo.DominantDominant:
+					femaleAlleles = AlleleCombo.RecessiveRecessive
+				AlleleCombo.RecessiveRecessive:
+					femaleAlleles = AlleleCombo.DominantDominant
+				_:
+					femaleAlleles = GetRandomAlleleCombo([AlleleCombo.DominantRecessive, AlleleCombo.RecessiveRecessive, AlleleCombo.DominantDominant])
+
 	return [targetAlleles, maleAlleles, femaleAlleles]
 
 
