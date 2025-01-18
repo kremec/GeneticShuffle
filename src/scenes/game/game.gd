@@ -25,8 +25,8 @@ var numberAllFemales: int = 0
 @onready var targetPupPosition = $layout/MarginContainer/HBoxContainer/targetPup
 
 @onready var btnSpin = $layout/MarginContainer/MarginContainer/btnSpin
-@onready var wheelMale = $layout/MarginContainer/MarginContainer/HBoxContainer/wheelMale
-@onready var wheelFemale = $layout/MarginContainer/MarginContainer/HBoxContainer/wheelFemale
+@onready var wheelMale = $layout/MarginContainer/MarginContainer/HBoxContainer/male/wheelMale
+@onready var wheelFemale = $layout/MarginContainer/MarginContainer/HBoxContainer/female/wheelFemale
 var canWheelSpin: bool = true
 var maleWheelSpinning: bool = false
 var femaleWheelSpinning: bool = false
@@ -66,7 +66,7 @@ func _ready() -> void:
 	btnSpin.pressed.connect(_on_btnSpin_pressed)
 	loadRound()
 
-var currentRound: int = 5
+var currentRound: int = 1
 func loadRound():
 	level.text = "Level " + str(currentRound)
 	if currentRound == 1:

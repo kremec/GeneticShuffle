@@ -199,10 +199,43 @@ func ResetAlleles():
 
 func Spin():
 	var rotationAngle: float = randf_range(360, 360 * 3)
-	var spinDuration: float = rotationAngle / wheelSpinSpeed
-
 	var wheelNode = $"."
+	# Fix rotation angle if too close to borders
+	var endRotationDegrees = int(wheelNode.rotation_degrees + rotationAngle) % 360
+	match wheelType:
+		WheelType.Wheel2:
+			if endRotationDegrees < 5 || endRotationDegrees > 355:
+				rotationAngle -= 15
+			elif endRotationDegrees > 175 && endRotationDegrees < 185:
+				rotationAngle -= 15
+		WheelType.Wheel4:
+			if endRotationDegrees < 5 || endRotationDegrees > 355:
+				rotationAngle -= 15
+			elif endRotationDegrees > 85 && endRotationDegrees < 95:
+				rotationAngle += 15
+			elif endRotationDegrees > 175 && endRotationDegrees < 185:
+				rotationAngle -= 15
+			elif endRotationDegrees > 265 && endRotationDegrees < 275:
+				rotationAngle += 15
+		WheelType.Wheel8:
+			if endRotationDegrees < 5 || endRotationDegrees > 355:
+				rotationAngle -= 15
+			elif endRotationDegrees > 40 && endRotationDegrees < 50:
+				rotationAngle += 15
+			elif endRotationDegrees > 85 && endRotationDegrees < 95:
+				rotationAngle += 15
+			elif endRotationDegrees > 130 && endRotationDegrees < 140:
+				rotationAngle -= 15
+			elif endRotationDegrees > 175 && endRotationDegrees < 185:
+				rotationAngle += 15
+			elif endRotationDegrees > 220 && endRotationDegrees < 230:
+				rotationAngle -= 15
+			elif endRotationDegrees > 265 && endRotationDegrees < 275:
+				rotationAngle += 15
+			elif endRotationDegrees > 300 && endRotationDegrees < 310:
+				rotationAngle -= 15
 
+	var spinDuration: float = rotationAngle / wheelSpinSpeed
 	var rotationTween = get_tree().create_tween()
 	rotationTween.tween_property(
 		wheelNode,

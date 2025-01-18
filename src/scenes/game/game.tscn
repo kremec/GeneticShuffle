@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://clqgk4akh3gfv"]
+[gd_scene load_steps=11 format=3 uid="uid://clqgk4akh3gfv"]
 
 [ext_resource type="Script" path="res://src/scenes/game/game.gd" id="1_eim4h"]
 [ext_resource type="PackedScene" uid="uid://dku5r3f77amfb" path="res://src/objects/wheel/wheel.tscn" id="2_gkba2"]
 [ext_resource type="Theme" uid="uid://k4a7qn27mcm8" path="res://theme/scrollbar.tres" id="2_hvv7x"]
 [ext_resource type="FontFile" uid="uid://djw4x7uisd0rl" path="res://assets/font/Aptos.ttf" id="3_mu3ax"]
+[ext_resource type="Texture2D" uid="uid://cupvy41sbwk5k" path="res://assets/arrow/arrow.png" id="5_ncv85"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vo3v"]
 bg_color = Color(1, 1, 1, 1)
@@ -143,11 +144,69 @@ size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/separation = 30
 
-[node name="wheelMale" parent="layout/MarginContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_gkba2")]
+[node name="male" type="Control" parent="layout/MarginContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
+mouse_filter = 2
 
-[node name="wheelFemale" parent="layout/MarginContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_gkba2")]
+[node name="wheelMale" parent="layout/MarginContainer/MarginContainer/HBoxContainer/male" instance=ExtResource("2_gkba2")]
 layout_mode = 2
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 500.0
+offset_bottom = 500.0
+
+[node name="arrow" type="TextureRect" parent="layout/MarginContainer/MarginContainer/HBoxContainer/male"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -19.0
+offset_top = -15.0
+offset_right = 16.0
+offset_bottom = 20.0
+grow_horizontal = 2
+pivot_offset = Vector2(248, 248)
+mouse_filter = 2
+texture = ExtResource("5_ncv85")
+flip_v = true
+
+[node name="female" type="Control" parent="layout/MarginContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="wheelFemale" parent="layout/MarginContainer/MarginContainer/HBoxContainer/female" instance=ExtResource("2_gkba2")]
+layout_mode = 2
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 500.0
+offset_bottom = 500.0
+
+[node name="arrow" type="TextureRect" parent="layout/MarginContainer/MarginContainer/HBoxContainer/female"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -19.0
+offset_top = -15.0
+offset_right = 16.0
+offset_bottom = 20.0
+grow_horizontal = 2
+pivot_offset = Vector2(248, 248)
+mouse_filter = 2
+texture = ExtResource("5_ncv85")
+flip_v = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="layout/MarginContainer"]
 layout_mode = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bss7clukvsfxe"]
+[gd_scene load_steps=10 format=3 uid="uid://bss7clukvsfxe"]
 
 [ext_resource type="Script" path="res://src/objects/card/card.gd" id="1_gimfk"]
 [ext_resource type="Texture2D" uid="uid://brx3islm3co4a" path="res://assets/guinea_pig/long-noswirls-cream.png" id="2_lx4jp"]
@@ -6,6 +6,8 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buinq"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2228x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ic2ue"]
 bg_color = Color(0, 0, 0, 0)
@@ -69,6 +71,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2228x")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_ic2ue")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xinse")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xjat8")
