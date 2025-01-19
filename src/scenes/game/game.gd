@@ -345,8 +345,10 @@ func _on_card_pressed(card: Card) -> void:
 
 func select_card(card: Card):
 	if card.selected: return
-	if card.sex == Card.Sex.Male && selectedMale != null: return
-	if card.sex == Card.Sex.Female && selectedFemale != null: return
+	if card.sex == Card.Sex.Male && selectedMale != null:
+		unselect_card(selectedMale)
+	if card.sex == Card.Sex.Female && selectedFemale != null:
+		unselect_card(selectedFemale)
 
 	# Properties
 	card.selected = true
@@ -497,8 +499,7 @@ func _onNewPupPresent():
 
 	# If pup is the target start new round
 	if newPup.furLengthAlleles == targetAlleles[0] && newPup.furSwirlsAlleles == targetAlleles[1] && newPup.furColorAlleles == targetAlleles[2]:
-		currentRound += 1
-		loadRound()
+		newPup.card_pressed.connect(_onTargetNewPupClicked)
 		return
 
 	# Position
@@ -519,6 +520,10 @@ func _onNewPupPresent():
 	)
 
 	newPupPositionTween.finished.connect(_onNewPupRepositioned)
+
+func _onTargetNewPupClicked(_card: Card):
+	currentRound += 1
+	loadRound()
 
 func _onNewPupRepositioned():
 	newPup.card_pressed.connect(_onNewPupClicked)
