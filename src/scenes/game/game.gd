@@ -172,7 +172,11 @@ func startingCards(allelesShown: Array[bool]):
 		allelesShown
 	)
 	male.card_pressed.connect(_on_card_pressed)
-	listMales.add_child(male)
+	var boxContainerMale = BoxContainer.new()
+	boxContainerMale.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	boxContainerMale.custom_minimum_size = Vector2(260, 260)
+	listMales.add_child(boxContainerMale)
+	boxContainerMale.add_child(male)
 
 	var female = create_card(
 		Card.Sex.Female,
@@ -182,7 +186,11 @@ func startingCards(allelesShown: Array[bool]):
 		allelesShown
 	)
 	female.card_pressed.connect(_on_card_pressed)
-	listFemales.add_child(female)
+	var boxContainerFemale = BoxContainer.new()
+	boxContainerFemale.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	boxContainerFemale.custom_minimum_size = Vector2(260, 260)
+	listFemales.add_child(boxContainerFemale)
+	boxContainerFemale.add_child(female)
 
 	# Target alleles
 	targetAlleles = [
@@ -350,17 +358,19 @@ func select_card(card: Card):
 	if card.sex == Card.Sex.Female && selectedFemale != null:
 		unselect_card(selectedFemale)
 
+	var cardSpaceNode = card.get_parent()
+	var cardNode = card.get_node(".")
+
 	# Properties
 	card.selected = true
 	match card.sex:
 		Card.Sex.Male:
 			selectedMale = card
-			selectedMaleIndex = card.get_index()
+			selectedMaleIndex = cardSpaceNode.get_index()
 		Card.Sex.Female:
 			selectedFemale = card
-			selectedFemaleIndex = card.get_index()
+			selectedFemaleIndex = cardSpaceNode.get_index()
 	# Position
-	var cardNode = card.get_node(".")
 	match card.sex:
 		Card.Sex.Male:
 			cardNode.reparent(selectedMalePosition, false)
@@ -374,16 +384,18 @@ func unselect_card(card: Card):
 	if !card.selected || !canWheelSpin: return
 	if card.sex == Card.Sex.Male && selectedMale == null: return
 	if card.sex == Card.Sex.Female && selectedFemale == null: return
-	# Position
+
+	var cardSpaceNode = listMales.get_child(selectedMaleIndex) if card.sex == Card.Sex.Male else listFemales.get_child(selectedFemaleIndex)
 	var cardNode = card.get_node(".")
+
+	# Position
 	match card.sex:
 		Card.Sex.Male:
-			cardNode.reparent(listMales, false)
-			listMales.move_child(cardNode, selectedMaleIndex)
+			cardNode.reparent(cardSpaceNode, false)
 			wheelMale.ResetAlleles()
 		Card.Sex.Female:
-			cardNode.reparent(listFemales, false)
-			listFemales.move_child(cardNode, selectedFemaleIndex)
+			# Remove empty space
+			cardNode.reparent(cardSpaceNode, false)
 			wheelFemale.ResetAlleles()
 	# Properties
 	card.selected = false
@@ -530,14 +542,20 @@ func _onNewPupRepositioned():
 
 func _onNewPupClicked(_card: Card):
 	newPup.card_pressed.disconnect(_onNewPupClicked)
+
+	var boxContainerPup = BoxContainer.new()
+	boxContainerPup.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	boxContainerPup.custom_minimum_size = Vector2(260, 260)
+
 	# Reparent new pup into correct list
-	var cardNode = newPup.get_node(".")
 	match newPup.sex:
 		Card.Sex.Male:
-			cardNode.reparent(listMales, false)
+			listMales.add_child(boxContainerPup)
 		Card.Sex.Female:
-			cardNode.reparent(listFemales, false)
-	
+			listFemales.add_child(boxContainerPup)
+	newPup.reparent(boxContainerPup, false)
+	newPup.set_position(Vector2(0, 0))
+
 	# Connect card_pressed
 	newPup.card_pressed.connect(_on_card_pressed)
 
