@@ -380,6 +380,12 @@ func select_card(card: Card):
 			wheelFemale.SetAlleles(card)
 	cardNode.set_position(Vector2(0, 0))
 
+	# Color spin button if both male and female are selected
+	if selectedMale != null && selectedFemale != null:
+		btnSpin.add_theme_stylebox_override("normal", getBtnSpinStyleBox("d2ffd2"))
+		btnSpin.add_theme_stylebox_override("hover", getBtnSpinStyleBox("afffaf"))
+		btnSpin.add_theme_stylebox_override("pressed", getBtnSpinStyleBox("8cff8c"))
+
 func unselect_card(card: Card):
 	if !card.selected || !canWheelSpin: return
 	if card.sex == Card.Sex.Male && selectedMale == null: return
@@ -406,6 +412,26 @@ func unselect_card(card: Card):
 		Card.Sex.Female:
 			selectedFemale = null
 			selectedFemaleIndex = -1
+	
+	# Color spin button if both male and female are selected
+	if selectedMale != null || selectedFemale != null:
+		btnSpin.add_theme_stylebox_override("normal", getBtnSpinStyleBox("ffffff"))
+		btnSpin.add_theme_stylebox_override("hover", getBtnSpinStyleBox("ffffff")) # e1e1e1
+		btnSpin.add_theme_stylebox_override("pressed", getBtnSpinStyleBox("ffffff")) # c3c3c3
+
+func getBtnSpinStyleBox(colorString: String) -> StyleBoxFlat:
+	var styleBox: StyleBoxFlat = StyleBoxFlat.new()
+	styleBox.bg_color = Color.from_string(colorString, Color.TRANSPARENT)
+	styleBox.border_width_left = 2
+	styleBox.border_width_top = 2
+	styleBox.border_width_right = 2
+	styleBox.border_width_bottom = 2
+	styleBox.border_color = Color.BLACK
+	styleBox.corner_radius_top_left = 10
+	styleBox.corner_radius_top_right = 10
+	styleBox.corner_radius_bottom_left = 10
+	styleBox.corner_radius_bottom_right = 10
+	return styleBox
 
 func _on_btnSpin_pressed() -> void:
 	wheelsSpin()

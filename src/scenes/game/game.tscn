@@ -12,7 +12,7 @@ bg_color = Color(1, 1, 1, 1)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c04hi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b35jr"]
-bg_color = Color(0.884037, 0.884037, 0.884037, 1)
+bg_color = Color(1, 1, 1, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -24,7 +24,7 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ak267"]
-bg_color = Color(0.764706, 0.764706, 0.764706, 1)
+bg_color = Color(1, 1, 1, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
