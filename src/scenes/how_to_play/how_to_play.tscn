@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cofx5ldtfg6uf"]
+[gd_scene load_steps=10 format=3 uid="uid://cofx5ldtfg6uf"]
 
 [ext_resource type="Script" path="res://src/scenes/how_to_play/how_to_play.gd" id="1_v6w4e"]
 [ext_resource type="FontFile" uid="uid://djw4x7uisd0rl" path="res://assets/font/Aptos.ttf" id="2_t14mi"]
@@ -44,6 +44,8 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6qyg4"]
 
 [node name="HowToPlay" type="Control"]
 layout_mode = 3
@@ -128,11 +130,13 @@ size_flags_vertical = 3
 focus_mode = 2
 theme = ExtResource("3_nqpbb")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/selection_color = Color(0.705882, 0.835294, 0.996078, 1)
 theme_override_font_sizes/bold_italics_font_size = 30
 theme_override_font_sizes/italics_font_size = 30
 theme_override_font_sizes/mono_font_size = 30
 theme_override_font_sizes/normal_font_size = 30
 theme_override_font_sizes/bold_font_size = 35
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6qyg4")
 bbcode_enabled = true
 text = "Your goal is to breed a certain type of guinea pig by selecting parents with the right traits.
 You will be trying to match certain fur colours, fur length and fur swirls.

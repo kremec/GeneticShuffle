@@ -62,8 +62,15 @@ var femaleWheelSpinning: bool = false
 
 @onready var level: Label = $layout/MarginContainer/level
 
+@onready var btnHelp = $layout/MarginContainer/MarginContainer/btnHelp
+@onready var howToPlay: HowToPlay = $HowToPlay
+
 func _ready() -> void:
 	btnSpin.pressed.connect(_on_btnSpin_pressed)
+
+	btnHelp.pressed.connect(_on_btnHelp_pressed)
+	howToPlay.btnExit.pressed.connect(_on_btnHelpExit_pressed)
+
 	loadRound()
 
 var currentRound: int = 1
@@ -106,6 +113,12 @@ func round5() -> void:
 	var allelesShown: Array[bool] = [true, true, true]
 	resetLevel(allelesShown)
 	startingCards(allelesShown)
+
+func _on_btnHelp_pressed() -> void:
+	howToPlay.visible = true
+
+func _on_btnHelpExit_pressed() -> void:
+	howToPlay.visible = false
 
 func resetLevel(allelesShown: Array[bool]):
 	canWheelSpin = true

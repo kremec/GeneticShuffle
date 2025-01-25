@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://clqgk4akh3gfv"]
+[gd_scene load_steps=16 format=3 uid="uid://clqgk4akh3gfv"]
 
 [ext_resource type="Script" path="res://src/scenes/game/game.gd" id="1_eim4h"]
 [ext_resource type="PackedScene" uid="uid://dku5r3f77amfb" path="res://src/objects/wheel/wheel.tscn" id="2_gkba2"]
 [ext_resource type="Theme" uid="uid://k4a7qn27mcm8" path="res://theme/scrollbar.tres" id="2_hvv7x"]
 [ext_resource type="FontFile" uid="uid://djw4x7uisd0rl" path="res://assets/font/Aptos.ttf" id="3_mu3ax"]
 [ext_resource type="Texture2D" uid="uid://cupvy41sbwk5k" path="res://assets/arrow/arrow.png" id="5_ncv85"]
+[ext_resource type="PackedScene" uid="uid://cofx5ldtfg6uf" path="res://src/scenes/how_to_play/how_to_play.tscn" id="6_2pr1q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vo3v"]
 bg_color = Color(1, 1, 1, 1)
@@ -36,6 +37,44 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f04lh"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ea5t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rxrsb"]
+bg_color = Color(0.884037, 0.884037, 0.884037, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cu5wu"]
+bg_color = Color(0.764706, 0.764706, 0.764706, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4a1x6"]
 bg_color = Color(1, 1, 1, 1)
 border_width_left = 2
 border_width_top = 2
@@ -111,6 +150,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_mu3ax")
 theme_override_font_sizes/font_size = 75
 text = "Level 1"
 
@@ -136,6 +176,25 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_b35jr")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ak267")
 theme_override_styles/normal = SubResource("StyleBoxFlat_f04lh")
 text = "Spin"
+
+[node name="btnHelp" type="Button" parent="layout/MarginContainer/MarginContainer"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_mu3ax")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6ea5t")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rxrsb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cu5wu")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4a1x6")
+text = "?
+"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="layout/MarginContainer/MarginContainer"]
 layout_mode = 2
@@ -426,3 +485,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 alignment = 1
+
+[node name="HowToPlay" parent="." instance=ExtResource("6_2pr1q")]
+visible = false
+layout_mode = 1

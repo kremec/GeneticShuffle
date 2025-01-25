@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cqubu87pvq7nq"]
+[gd_scene load_steps=12 format=3 uid="uid://cqubu87pvq7nq"]
 
 [ext_resource type="Script" path="res://src/scenes/main_menu/main_menu.gd" id="1_j8h2n"]
 [ext_resource type="Texture2D" uid="uid://brx3islm3co4a" path="res://assets/guinea_pig/long-noswirls-cream.png" id="1_jpkbo"]
 [ext_resource type="Texture2D" uid="uid://byce8jnxkp1ut" path="res://assets/guinea_pig/short-noswirls-cream.png" id="2_vhy0n"]
 [ext_resource type="Texture2D" uid="uid://5pcbctx21bet" path="res://assets/guinea_pig/short-swirls-white.png" id="3_7fr3p"]
 [ext_resource type="FontFile" uid="uid://djw4x7uisd0rl" path="res://assets/font/Aptos.ttf" id="4_lr2ss"]
+[ext_resource type="PackedScene" uid="uid://cofx5ldtfg6uf" path="res://src/scenes/how_to_play/how_to_play.tscn" id="6_5cn4s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_urxpa"]
 bg_color = Color(1, 1, 1, 1)
@@ -111,10 +112,10 @@ flip_h = true
 
 [node name="lblTitle_Genetic" type="Label" parent="."]
 layout_mode = 2
-offset_left = 182.0
-offset_top = 301.0
-offset_right = 1032.0
-offset_bottom = 607.0
+offset_left = 150.0
+offset_top = 310.0
+offset_right = 1000.0
+offset_bottom = 616.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -145,7 +146,7 @@ theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_lr2ss")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 50
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0u5ps")
 theme_override_styles/hover = SubResource("StyleBoxFlat_u3s41")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_s4rfe")
@@ -164,9 +165,13 @@ theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_lr2ss")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 50
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0u5ps")
 theme_override_styles/hover = SubResource("StyleBoxFlat_u3s41")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_s4rfe")
 theme_override_styles/normal = SubResource("StyleBoxFlat_cwkj3")
 text = "  How to play  "
+
+[node name="HowToPlay" parent="." instance=ExtResource("6_5cn4s")]
+visible = false
+layout_mode = 1
