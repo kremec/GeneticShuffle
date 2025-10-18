@@ -453,6 +453,12 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.keycode == KEY_ENTER && event.pressed && !event.is_echo():
 			wheelsSpin()
+			pupCollect()
+
+func pupCollect() -> void:
+	if newPup == null || !(newPup.card_pressed.is_connected(_onNewPupClicked) || newPup.card_pressed.is_connected(_onTargetNewPupClicked)):
+		return
+	newPup.card_pressed.emit(newPup)
 
 func wheelsSpin() -> void:
 	if selectedMale == null || selectedFemale == null || maleWheelSpinning || femaleWheelSpinning || !canWheelSpin:

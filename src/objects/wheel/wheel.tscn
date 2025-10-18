@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dku5r3f77amfb"]
 
-[ext_resource type="Script" path="res://src/objects/wheel/wheel.gd" id="1_2bwdd"]
+[ext_resource type="Script" uid="uid://beoybojjdthki" path="res://src/objects/wheel/wheel.gd" id="1_2bwdd"]
 [ext_resource type="Texture2D" uid="uid://dkj6cum2qyb5g" path="res://assets/wheel/wheel_2.png" id="2_alkvf"]
 
 [node name="Wheel" type="Control"]

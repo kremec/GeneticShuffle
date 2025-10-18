@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bss7clukvsfxe"]
 
-[ext_resource type="Script" path="res://src/objects/card/card.gd" id="1_gimfk"]
+[ext_resource type="Script" uid="uid://2pmw8md8s2i3" path="res://src/objects/card/card.gd" id="1_gimfk"]
 [ext_resource type="Texture2D" uid="uid://brx3islm3co4a" path="res://assets/guinea_pig/long-noswirls-cream.png" id="2_lx4jp"]
 [ext_resource type="FontFile" uid="uid://djw4x7uisd0rl" path="res://assets/font/Aptos.ttf" id="3_5ir8t"]
 

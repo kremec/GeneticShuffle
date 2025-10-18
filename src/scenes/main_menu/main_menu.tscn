@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cqubu87pvq7nq"]
 
-[ext_resource type="Script" path="res://src/scenes/main_menu/main_menu.gd" id="1_j8h2n"]
+[ext_resource type="Script" uid="uid://by0d6roppnxhw" path="res://src/scenes/main_menu/main_menu.gd" id="1_j8h2n"]
 [ext_resource type="Texture2D" uid="uid://brx3islm3co4a" path="res://assets/guinea_pig/long-noswirls-cream.png" id="1_jpkbo"]
 [ext_resource type="Texture2D" uid="uid://byce8jnxkp1ut" path="res://assets/guinea_pig/short-noswirls-cream.png" id="2_vhy0n"]
 [ext_resource type="Texture2D" uid="uid://5pcbctx21bet" path="res://assets/guinea_pig/short-swirls-white.png" id="3_7fr3p"]
@@ -142,9 +142,9 @@ offset_right = 1329.0
 offset_bottom = 992.0
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_lr2ss")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0u5ps")
@@ -161,9 +161,9 @@ offset_right = 1853.0
 offset_bottom = 992.0
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_lr2ss")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0u5ps")
